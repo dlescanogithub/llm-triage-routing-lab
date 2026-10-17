@@ -18,7 +18,7 @@ from triage_lab.logutil import (
 )
 from triage_lab.policy import decide_route
 from triage_lab.sanitize import find_markers, sanitize_text
-from triage_lab.schema import parse_classification
+from triage_lab.schema import diagnose_classification, parse_classification
 from triage_lab.taxonomy import load_taxonomy
 from triage_lab.tools import (
     BUSINESS_WRITE_EFFECTS,
@@ -151,6 +151,48 @@ def test_schema_accepts_only_the_contract() -> None:
     )
     assert parse_classification(boolean, categories) is None
     assert parse_classification("[]", categories) is None
+    invented = json.dumps(
+        {
+            "category": "order_modification",
+            "confidence": 100,
+            "injection_suspected": False,
+            "rationale": "made up",
+        }
+    )
+    diagnosed = diagnose_classification(invented, categories)
+    assert isinstance(diagnosed, tuple)
+    fields = {error.field: error for error in diagnosed}
+    assert "order_modification" in fields["category"].value
+    assert "order_status" in fields["category"].allowed
+    assert "product_question" in fields["category"].allowed
+    assert "100" in fields["confidence"].value
+    assert "0.0" in fields["confidence"].allowed
+    assert "1.0" in fields["confidence"].allowed
+    percent = json.dumps(
+        {
+            "category": "product_info",
+            "confidence": 80,
+            "injection_suspected": False,
+            "rationale": "percent",
+        }
+    )
+    percent_errors = diagnose_classification(percent, categories)
+    assert isinstance(percent_errors, tuple)
+    assert any(
+        error.field == "category" and "product_info" in error.value
+        for error in percent_errors
+    )
+    legal = json.dumps(
+        {
+            "category": "legal_threat",
+            "confidence": 0.4,
+            "injection_suspected": False,
+            "rationale": "invented",
+        }
+    )
+    legal_errors = diagnose_classification(legal, categories)
+    assert isinstance(legal_errors, tuple)
+    assert any("legal_threat" in error.value for error in legal_errors)
 
 
 def test_threshold_is_monotonic() -> None:

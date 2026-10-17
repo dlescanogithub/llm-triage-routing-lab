@@ -170,7 +170,7 @@ def cmd_live(args: argparse.Namespace) -> int:
             repo_root() / "var" / "live-evals",
             models,
         )
-    except (LiveBudgetError, LiveCallError) as exc:
+    except (LiveBudgetError, LiveCallError, LiveConfigError) as exc:
         print(str(exc), file=sys.stderr)
         return 3
     if summary.get("stopped"):

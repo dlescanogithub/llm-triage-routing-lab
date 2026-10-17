@@ -6,7 +6,7 @@ Command: `python -m triage_lab eval`
 
 Package version: 0.1.0
 
-Git commit: `283f08ecee0aca3f088bc045aa87e2d392687fb3`
+Git commit: `d5f1a0ec694a34dd2977db170820abf25f9ddb06`
 
 Split: test
 

@@ -23,7 +23,7 @@ Injection and `abuse_or_legal` go to `security_review` at every tau, so a wrong 
 
 ## 2026-10-17 test slices for `large_sim`
 
-Command `python -m triage_lab eval`. Package 0.1.0. Commit `283f08ecee0aca3f088bc045aa87e2d392687fb3`. Simulated by construction.
+Command `python -m triage_lab eval`. Package 0.1.0. Commit `d5f1a0ec694a34dd2977db170820abf25f9ddb06`. Simulated by construction.
 
 | Slice | n | Accuracy |
 | --- | --- | --- |

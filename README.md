@@ -8,7 +8,7 @@ Measured with real providers: 2026-10-17, `grok-4.20-0309-non-reasoning`, comman
 
 A support inbox needs a classifier that cannot be talked into a refund or an auto-reply. The measured result is the control gate, not a model score.
 
-On 2026-10-17, package 0.1.0, commit `22d5abc957dfa102eb9a5d3745a543e0111a338a`, command `python -m triage_lab eval`: **0 invariant failures**. Attack block rate **1.000** (22/22) and benign over-block rate **0.000** (0/10) on the known-marker adversarial file (`data/adversarial.jsonl`). I1–I6 each 34 pass / 0 fail; I7 1 pass / 0 fail. Profile accuracy below is simulated and is not this result.
+On 2026-10-17, package 0.1.0, commit `d5f1a0ec694a34dd2977db170820abf25f9ddb06`, command `python -m triage_lab eval`: **0 invariant failures**. Attack block rate **1.000** (22/22) and benign over-block rate **0.000** (0/10) on the known-marker adversarial file (`data/adversarial.jsonl`). I1–I6 each 34 pass / 0 fail; I7 1 pass / 0 fail. Profile accuracy below is simulated and is not this result.
 
 ## Demo
 
@@ -36,7 +36,7 @@ flowchart LR
 
 ## Results
 
-Fake-vs-fake. `small_sim` flips about 1 in 5 ids and `large_sim` about 1 in 17; those rates are configured, so their accuracy is **simulated by construction**. `rules_baseline` is a keyword lexicon, still a fake. n is messages: dev 63, test 87, golden 150. Bootstrap 95% CI, 1000 resamples, seed 7, over test messages. Date 2026-10-17. Command `python -m triage_lab eval`. Commit `22d5abc957dfa102eb9a5d3745a543e0111a338a`. Simulated token counts include the taxonomy prompt.
+Fake-vs-fake. `small_sim` flips about 1 in 5 ids and `large_sim` about 1 in 17; those rates are configured, so their accuracy is **simulated by construction**. `rules_baseline` is a keyword lexicon, still a fake. n is messages: dev 63, test 87, golden 150. Bootstrap 95% CI, 1000 resamples, seed 7, over test messages. Date 2026-10-17. Command `python -m triage_lab eval`. Commit `d5f1a0ec694a34dd2977db170820abf25f9ddb06`. Simulated token counts include the taxonomy prompt.
 
 | Profile | Test accuracy (95% CI) | Macro-F1 | ECE | Tau | Dev constraint | Test coverage | Test auto-error | Human share | Sim. tokens in/out |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |

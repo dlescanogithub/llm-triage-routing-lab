@@ -16,7 +16,7 @@ saving_usd = human_usd - blended_usd
 
 `human_share` and `auto_error` come from the test split of a named run. `tokens_*` in this repo are simulated (character heuristic plus profile overhead). `price_in` and `price_out` used below are **[EST] 1.00 and 3.00 USD per million tokens**. `human_usd` is **[EST] 1.00**.
 
-Worked example for `large_sim` on the 2026-10-17 run (`python -m triage_lab eval`, commit `22d5abc957dfa102eb9a5d3745a543e0111a338a`, package 0.1.0). The token term ignores cached tokens:
+Worked example for `large_sim` on the 2026-10-17 run (`python -m triage_lab eval`, commit `d5f1a0ec694a34dd2977db170820abf25f9ddb06`, package 0.1.0). The token term ignores cached tokens:
 
 - simulated tokens 989.207 / 130 per ticket
 - model_usd = 0.001379

@@ -7,7 +7,7 @@
   },
   "command": "python -m triage_lab eval",
   "generated_on": "2026-10-17",
-  "git_commit": "22d5abc957dfa102eb9a5d3745a543e0111a338a",
+  "git_commit": "d5f1a0ec694a34dd2977db170820abf25f9ddb06",
   "invariants": {
     "I1": {
       "fail": 0,

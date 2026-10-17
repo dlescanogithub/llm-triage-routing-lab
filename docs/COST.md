@@ -2,7 +2,7 @@
 
 Providers in this table are simulated profiles. Accuracy is configured or lexical, so the quality column is not a model measurement. Token counts are a character/4 heuristic plus a per-profile overhead (`token_note` in `docs/results/summary.json`). Latency is not measured: the eval clock is frozen. A fake clock is not a p50.
 
-Prices are **[EST] placeholders** chosen for arithmetic: USD 1.00 per million input tokens and USD 3.00 per million output tokens. They are not a vendor price. Date of the token measurement: 2026-10-17. Command: `python -m triage_lab eval`. Package 0.1.0. Commit `22d5abc957dfa102eb9a5d3745a543e0111a338a`. This estimate ignores cached tokens: it multiplies reported or simulated prompt tokens by the input price and does not apply a cache discount.
+Prices are **[EST] placeholders** chosen for arithmetic: USD 1.00 per million input tokens and USD 3.00 per million output tokens. They are not a vendor price. Date of the token measurement: 2026-10-17. Command: `python -m triage_lab eval`. Package 0.1.0. Commit `d5f1a0ec694a34dd2977db170820abf25f9ddb06`. This estimate ignores cached tokens: it multiplies reported or simulated prompt tokens by the input price and does not apply a cache discount.
 
 Human review: **[EST] USD 1.00 per escalated ticket**.
 

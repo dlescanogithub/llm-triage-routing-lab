@@ -11,8 +11,8 @@ Pensalo como un mostrador con un manual. El mensaje del cliente es un papel que 
 1. Entra un ticket sintético: asunto, cuerpo, idioma, etiqueta de oro.
 2. El sanitizador saca caracteres de control, corta el texto a 4000 caracteres y neutraliza una lista conocida de frases de inyección. No promete cazar ataques nuevos.
 3. El cuerpo va entre delimitadores `<ticket>`, separado de las instrucciones.
-4. El proveedor tiene que devolver JSON: `category`, `confidence`, `injection_suspected`, `rationale`.
-5. Si el JSON no valida, reintenta hasta 3 veces y después manda a `human_review`.
+4. El proveedor tiene que devolver JSON: `category` (una de las 9, con el nombre exacto), `confidence` entre 0.0 y 1.0, `injection_suspected` y `rationale`. El prompt trae la tabla y un ejemplo.
+5. Si el JSON no valida, el siguiente intento incluye qué campo falló y cuáles son los valores permitidos. No se repite el mismo pedido. A los 3 intentos, `human_review`.
 6. La política elige la ruta. Si el umbral `tau` no se cumple, va a `human_review`. Si hay inyección o la categoría es `abuse_or_legal`, va a `security_review` aunque la confianza sea alta.
 7. Recién ahí se habilitan las herramientas de esa ruta. Son de lectura o de nota interna. No hay herramienta de reembolso.
 8. Todo queda en un trace JSONL: sin el cuerpo completo y sin claves.

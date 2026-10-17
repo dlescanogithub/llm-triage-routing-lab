@@ -7,7 +7,7 @@
   },
   "command": "python -m triage_lab eval",
   "generated_on": "2026-10-17",
-  "git_commit": "283f08ecee0aca3f088bc045aa87e2d392687fb3",
+  "git_commit": "22d5abc957dfa102eb9a5d3745a543e0111a338a",
   "invariants": {
     "I1": {
       "fail": 0,
@@ -83,7 +83,7 @@
         "n_boot": 1000.0,
         "point": 0.9655172413793104
       },
-      "avg_tokens_in": 991.6321839080459,
+      "avg_tokens_in": 1498.4137931034484,
       "avg_tokens_out": 210.0,
       "confusion": {
         "abuse_or_legal": {
@@ -353,7 +353,7 @@
         "n_boot": 1000.0,
         "point": 0.9655172413793104
       },
-      "avg_tokens_in": 735.816091954023,
+      "avg_tokens_in": 989.2068965517242,
       "avg_tokens_out": 130.0,
       "confusion": {
         "abuse_or_legal": {
@@ -623,7 +623,7 @@
         "n_boot": 1000.0,
         "point": 0.7701149425287356
       },
-      "avg_tokens_in": 103.816091954023,
+      "avg_tokens_in": 357.2068965517241,
       "avg_tokens_out": 36.0,
       "confusion": {
         "abuse_or_legal": {
@@ -893,7 +893,7 @@
         "n_boot": 1000.0,
         "point": 0.6436781609195402
       },
-      "avg_tokens_in": 255.816091954023,
+      "avg_tokens_in": 509.2068965517241,
       "avg_tokens_out": 80.0,
       "confusion": {
         "abuse_or_legal": {

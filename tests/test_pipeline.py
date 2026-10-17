@@ -11,9 +11,9 @@ from triage_lab.authored import AUTHORED
 from triage_lab.classify import score_large, score_profile, score_rules
 from triage_lab.config import PipelineConfig
 from triage_lab.invariants import Limits, check_invariants
-from triage_lab.models import CompletionRequest, Ticket
+from triage_lab.models import Classification, CompletionRequest, Ticket
 from triage_lab.pipeline import delay_seconds, run_ticket
-from triage_lab.prompts import SYSTEM_PROMPT, render_user
+from triage_lab.prompts import SYSTEM_PROMPT, build_system_prompt, render_user
 from triage_lab.provider import (
     CassetteMiss,
     CassetteProvider,
@@ -21,6 +21,11 @@ from triage_lab.provider import (
     make_provider,
 )
 from triage_lab.sanitize import sanitize_text
+from triage_lab.schema import (
+    diagnose_classification,
+    dumps_classification,
+    format_retry_feedback,
+)
 from triage_lab.taxonomy import load_taxonomy
 
 
@@ -128,6 +133,78 @@ def test_invalid_schema_falls_back_and_retries_are_bounded() -> None:
     assert all(delay <= 0.05 for delay in sleeps)
     violations = check_invariants(trace.events, taxonomy)
     assert [item.invariant for item in violations] == []
+
+
+def test_invented_category_retries_with_feedback_not_the_same_request() -> None:
+    """Raw model text used a made-up category and a 0-100 score.
+
+    The second cassette key exists only because the retry appends the field error.
+    """
+    taxonomy = load_taxonomy()
+    system = build_system_prompt(taxonomy.categories)
+    assert system == SYSTEM_PROMPT
+    ticket = _ticket("Cuales son las medidas de la manta?", id="raw-1")
+    body = sanitize_text(ticket.body).text
+    base_user = render_user(ticket.id, ticket.subject, body)
+    bad = json.dumps(
+        {
+            "category": "order_modification",
+            "confidence": 100,
+            "injection_suspected": False,
+            "rationale": "invented",
+        }
+    )
+    diagnosed = diagnose_classification(bad, set(taxonomy.categories))
+    assert isinstance(diagnosed, tuple)
+    feedback = format_retry_feedback(diagnosed)
+    assert "order_modification" in feedback
+    assert "100" in feedback
+    assert "0.0" in feedback and "1.0" in feedback
+    assert "order_status" in feedback
+    good = dumps_classification(
+        Classification("product_question", 0.91, False, "measures")
+    )
+    first = CompletionRequest(system=system, user=base_user)
+    second = CompletionRequest(system=system, user=f"{base_user}\n\n{feedback}")
+    assert cassette_key(first) != cassette_key(second)
+    provider = CassetteProvider(
+        {
+            cassette_key(first): {"text": bad, "tokens_in": 10, "tokens_out": 4},
+            cassette_key(second): {"text": good, "tokens_in": 12, "tokens_out": 5},
+        }
+    )
+    outcome, trace = run_ticket(
+        ticket,
+        provider,
+        taxonomy,
+        PipelineConfig(tau=0.5),
+        clock=lambda: 10.0,
+        sleeper=lambda _delay: None,
+        rng=random.Random(0),
+        run_id="feedback-1",
+    )
+    assert outcome.schema_valid is True
+    assert outcome.attempts == 2
+    assert outcome.category == "product_question"
+    assert outcome.route == "auto_reply_faq"
+    attempts = [event for event in trace.events if event["kind"] == "attempt"]
+    assert attempts[0]["payload"]["feedback"] is False
+    assert attempts[1]["payload"]["feedback"] is True
+    assert "category" in attempts[0]["payload"]["invalid_fields"]
+    assert "confidence" in attempts[0]["payload"]["invalid_fields"]
+    lone = CassetteProvider(
+        {cassette_key(first): {"text": bad, "tokens_in": 1, "tokens_out": 1}}
+    )
+    with pytest.raises(CassetteMiss):
+        run_ticket(
+            ticket,
+            lone,
+            taxonomy,
+            PipelineConfig(tau=0.5, max_attempts=2),
+            clock=lambda: 10.0,
+            sleeper=lambda _delay: None,
+            run_id="feedback-miss",
+        )
 
 
 def test_delay_is_capped() -> None:

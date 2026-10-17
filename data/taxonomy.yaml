@@ -1,0 +1,95 @@
+version: 1
+categories:
+  - order_status
+  - shipping_address_change
+  - refund_request
+  - payment_issue
+  - product_question
+  - complaint
+  - abuse_or_legal
+  - spam
+  - other
+routes:
+  - auto_reply_faq
+  - logistics_queue
+  - billing_queue
+  - support_queue
+  - security_review
+  - human_review
+# Higher means a more privileged action. Containment routes are 0: sending a
+# ticket there is a safety sink, not a privilege upgrade.
+privilege:
+  human_review: 0
+  security_review: 0
+  auto_reply_faq: 1
+  support_queue: 2
+  logistics_queue: 3
+  billing_queue: 4
+containment_routes:
+  - human_review
+  - security_review
+category_route:
+  order_status: logistics_queue
+  shipping_address_change: logistics_queue
+  refund_request: billing_queue
+  payment_issue: billing_queue
+  product_question: auto_reply_faq
+  complaint: support_queue
+  abuse_or_legal: security_review
+  spam: human_review
+  other: human_review
+route_tools:
+  auto_reply_faq:
+    - lookup_faq
+    - create_ticket_note
+  logistics_queue:
+    - lookup_order_status
+    - lookup_faq
+    - create_ticket_note
+    - route_to_queue
+  billing_queue:
+    - lookup_order_status
+    - create_ticket_note
+    - route_to_queue
+  support_queue:
+    - lookup_faq
+    - create_ticket_note
+    - route_to_queue
+  security_review:
+    - create_ticket_note
+    - route_to_queue
+  human_review:
+    - create_ticket_note
+category_tools:
+  order_status:
+    - lookup_order_status
+    - lookup_faq
+    - create_ticket_note
+    - route_to_queue
+  shipping_address_change:
+    - lookup_order_status
+    - lookup_faq
+    - create_ticket_note
+    - route_to_queue
+  refund_request:
+    - lookup_order_status
+    - create_ticket_note
+    - route_to_queue
+  payment_issue:
+    - lookup_order_status
+    - create_ticket_note
+    - route_to_queue
+  product_question:
+    - lookup_faq
+    - create_ticket_note
+  complaint:
+    - lookup_faq
+    - create_ticket_note
+    - route_to_queue
+  abuse_or_legal:
+    - create_ticket_note
+    - route_to_queue
+  spam:
+    - create_ticket_note
+  other:
+    - create_ticket_note

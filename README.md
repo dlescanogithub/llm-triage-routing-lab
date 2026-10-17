@@ -1,14 +1,14 @@
 # llm-triage-routing-lab
 
-All providers in CI are deterministic fakes: this repo tests the harness, the invariants and the controls, not model quality. Real-model quality comparison: re-verification pending.
+All providers in CI are deterministic fakes: this repo tests the harness, the invariants and the controls, not model quality. Real-model quality from the third live check is on the next line (n=87).
 
-Measured with real providers: 2026-10-17, `grok-4.20-0309-non-reasoning`, command `python -m triage_lab live --split test --max-tickets 40`, **0/40** schema-valid (the prompt listed no taxonomy). Corrected in this repo. Re-verification pending.
+Measured with real providers: 2026-10-17, third check on the test split, n=87, schema-valid 87/87, accuracy 82/87. The model name and the token cost were not stored here. Attack and benign rates are printed only with n. A denominator of 0 is n/a, not 0. n from 1 to 4 is `n=..., no concluyente`.
 
 ## Problem and result
 
 A support inbox needs a classifier that cannot be talked into a refund or an auto-reply. The measured result is the control gate, not a model score.
 
-On 2026-10-17, package 0.1.0, commit `d5f1a0ec694a34dd2977db170820abf25f9ddb06`, command `python -m triage_lab eval`: **0 invariant failures**. Attack block rate **1.000** (22/22) and benign over-block rate **0.000** (0/10) on the known-marker adversarial file (`data/adversarial.jsonl`). I1–I6 each 34 pass / 0 fail; I7 1 pass / 0 fail. Profile accuracy below is simulated and is not this result.
+On 2026-10-17, package 0.1.0, commit `81e3aac00afc5f3662fb20af60aa7642ba198a99`, command `python -m triage_lab eval`: **0 invariant failures**. Attack block rate **1.000 (n=22)** and benign over-block rate **0.000 (n=10)** on the known-marker adversarial file (`data/adversarial.jsonl`). I1–I6 each 34 pass / 0 fail; I7 1 pass / 0 fail. Profile accuracy below is simulated and is not this result.
 
 ## Demo
 
@@ -47,7 +47,7 @@ Fake-vs-fake. `small_sim` flips about 1 in 5 ids and `large_sim` about 1 in 17; 
 
 Exact McNemar on the same 87 test messages (harness check only): large vs small, 32 discordant, p < 0.0001; large vs rules, 21 discordant, p 0.0002; small vs rules, 11 discordant, p 0.0010.
 
-Forced regression, `python -m triage_lab eval --regression` (`naive_sim`, sanitizer and allowlist off): exit **1**. I1 18 pass / 14 fail, I2 24/8, I3 27/5. Attack block rate 0.091.
+Forced regression, `python -m triage_lab eval --regression` (`naive_sim`, sanitizer and allowlist off): exit **1**. I1 18 pass / 14 fail, I2 24/8, I3 27/5. Attack block rate 0.091 (n=22). Benign over-block 0.000 (n=10).
 
 Confusion matrices: `docs/results/`.
 
@@ -107,7 +107,7 @@ Dockerfile provided, not built in CI. No local image build: container tooling wa
 | Item | Status |
 | --- | --- |
 | Taxonomy, pipeline, fakes, gate, shadow, kill switch | Implemented |
-| Live adapter (off by default) | implementado; verificación live: el primer intento clasificó 0/40 por prompt sin taxonomía (corregido en este PR); re-verificación pendiente |
+| Live adapter (off by default) | implementado; tercera verificación live 2026-10-17: schema 87/87, accuracy 82/87 (n=87). Tasas solo con n; n=0 es n/a |
 | SFT export to a local JSONL | Implemented; design-only (no train, no upload) |
 | Fine-tuning, IMAP/webhook, helpdesk, SSO/RBAC | Design only |
 | Languages beyond es/en, production drift, PII redaction service | Design only |

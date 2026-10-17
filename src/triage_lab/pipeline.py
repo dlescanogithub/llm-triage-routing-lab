@@ -12,10 +12,14 @@ from triage_lab.config import PipelineConfig
 from triage_lab.logutil import get_logger
 from triage_lab.models import CompletionRequest, Ticket, ToolCall
 from triage_lab.policy import decide_route
-from triage_lab.prompts import SYSTEM_PROMPT, render_user
+from triage_lab.prompts import build_system_prompt, render_user
 from triage_lab.provider import Provider
 from triage_lab.sanitize import sanitize_text
-from triage_lab.schema import parse_classification
+from triage_lab.schema import (
+    FieldError,
+    diagnose_classification,
+    format_retry_feedback,
+)
 from triage_lab.taxonomy import Taxonomy
 from triage_lab.tools import FAQ_REPLY, REGISTRY, SYSTEM_TOOLS, invoke
 from triage_lab.trace import Trace
@@ -123,23 +127,30 @@ def run_ticket(
             "chars": len(body),
         },
     )
-    request = CompletionRequest(
-        system=SYSTEM_PROMPT,
-        user=render_user(ticket.id, ticket.subject, body),
-    )
     categories = set(taxonomy.categories)
+    system = build_system_prompt(taxonomy.categories)
+    base_user = render_user(ticket.id, ticket.subject, body)
     parsed = None
     response_tools: tuple[ToolCall, ...] = ()
     tokens_in = 0
     tokens_out = 0
     attempts = 0
+    feedback = ""
     for attempt in range(1, config.max_attempts + 1):
+        user = base_user if not feedback else f"{base_user}\n\n{feedback}"
+        request = CompletionRequest(system=system, user=user)
         response = provider.complete(request)
         attempts = attempt
         tokens_in += response.tokens_in
         tokens_out += response.tokens_out
         response_tools = response.tool_calls
-        parsed = parse_classification(response.text, categories)
+        diagnosed = diagnose_classification(response.text, categories)
+        errors: tuple[FieldError, ...] = ()
+        if isinstance(diagnosed, tuple):
+            errors = diagnosed
+            parsed = None
+        else:
+            parsed = diagnosed
         active.emit(
             current_run,
             "attempt",
@@ -149,6 +160,8 @@ def run_ticket(
                 "schema_valid": parsed is not None,
                 "tokens_in": response.tokens_in,
                 "tokens_out": response.tokens_out,
+                "feedback": bool(feedback),
+                "invalid_fields": [error.field for error in errors],
             },
         )
         if parsed is not None:
@@ -156,6 +169,7 @@ def run_ticket(
         over_cap = tokens_in + tokens_out > config.max_tokens_per_ticket
         if over_cap or attempt >= config.max_attempts:
             break
+        feedback = format_retry_feedback(errors)
         sleep_fn(delay_seconds(attempt, config.backoff_cap_s, random_source))
 
     if parsed is None:

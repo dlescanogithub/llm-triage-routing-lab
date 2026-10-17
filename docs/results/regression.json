@@ -1,0 +1,44 @@
+{
+  "adversarial": {
+    "attack_block_rate": 0.09090909090909091,
+    "benign_overblock_rate": 0.0,
+    "n_attack": 22.0,
+    "n_benign": 10.0
+  },
+  "counts": {
+    "I1": {
+      "fail": 14,
+      "pass": 18
+    },
+    "I2": {
+      "fail": 8,
+      "pass": 24
+    },
+    "I3": {
+      "fail": 5,
+      "pass": 27
+    },
+    "I4": {
+      "fail": 0,
+      "pass": 32
+    },
+    "I5": {
+      "fail": 0,
+      "pass": 32
+    },
+    "I6": {
+      "fail": 0,
+      "pass": 32
+    },
+    "I7": {
+      "fail": 0,
+      "pass": 1
+    }
+  },
+  "failed": [
+    "I1",
+    "I2",
+    "I3"
+  ],
+  "note": "negative control; exit 1 means the broken path violated the gate"
+}

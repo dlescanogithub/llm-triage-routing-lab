@@ -1,0 +1,1162 @@
+{
+  "adversarial": {
+    "attack_block_rate": 1.0,
+    "benign_overblock_rate": 0.0,
+    "n_attack": 22.0,
+    "n_benign": 10.0
+  },
+  "command": "python -m triage_lab eval",
+  "generated_on": "2026-10-17",
+  "git_commit": "283f08ecee0aca3f088bc045aa87e2d392687fb3",
+  "invariants": {
+    "I1": {
+      "fail": 0,
+      "pass": 34
+    },
+    "I2": {
+      "fail": 0,
+      "pass": 34
+    },
+    "I3": {
+      "fail": 0,
+      "pass": 34
+    },
+    "I4": {
+      "fail": 0,
+      "pass": 34
+    },
+    "I5": {
+      "fail": 0,
+      "pass": 34
+    },
+    "I6": {
+      "fail": 0,
+      "pass": 34
+    },
+    "I7": {
+      "fail": 0,
+      "pass": 1
+    }
+  },
+  "mcnemar": [
+    {
+      "a": "large_sim",
+      "b": "small_sim",
+      "b_a_wrong_b_right": 2,
+      "c_a_right_b_wrong": 30,
+      "n": 87,
+      "n_discordant": 32,
+      "note": "exact McNemar on paired test messages; simulated profiles, not models",
+      "p": 2.4633482098579407e-07,
+      "p_display": "<0.0001"
+    },
+    {
+      "a": "large_sim",
+      "b": "rules_baseline",
+      "b_a_wrong_b_right": 2,
+      "c_a_right_b_wrong": 19,
+      "n": 87,
+      "n_discordant": 21,
+      "note": "exact McNemar on paired test messages; simulated profiles, not models",
+      "p": 0.00022125244140625,
+      "p_display": "0.0002"
+    },
+    {
+      "a": "small_sim",
+      "b": "rules_baseline",
+      "b_a_wrong_b_right": 11,
+      "c_a_right_b_wrong": 0,
+      "n": 87,
+      "n_discordant": 11,
+      "note": "exact McNemar on paired test messages; simulated profiles, not models",
+      "p": 0.0009765625,
+      "p_display": "0.0010"
+    }
+  ],
+  "providers": {
+    "cascade": {
+      "accuracy": 0.9655172413793104,
+      "accuracy_ci95": {
+        "high": 1.0,
+        "low": 0.9310344827586207,
+        "n": 87.0,
+        "n_boot": 1000.0,
+        "point": 0.9655172413793104
+      },
+      "avg_tokens_in": 991.6321839080459,
+      "avg_tokens_out": 210.0,
+      "confusion": {
+        "abuse_or_legal": {
+          "abuse_or_legal": 10,
+          "complaint": 0,
+          "order_status": 0,
+          "other": 0,
+          "payment_issue": 0,
+          "product_question": 0,
+          "refund_request": 0,
+          "shipping_address_change": 0,
+          "spam": 0
+        },
+        "complaint": {
+          "abuse_or_legal": 0,
+          "complaint": 11,
+          "order_status": 0,
+          "other": 0,
+          "payment_issue": 0,
+          "product_question": 0,
+          "refund_request": 0,
+          "shipping_address_change": 0,
+          "spam": 0
+        },
+        "order_status": {
+          "abuse_or_legal": 0,
+          "complaint": 0,
+          "order_status": 12,
+          "other": 0,
+          "payment_issue": 0,
+          "product_question": 0,
+          "refund_request": 0,
+          "shipping_address_change": 0,
+          "spam": 0
+        },
+        "other": {
+          "abuse_or_legal": 0,
+          "complaint": 0,
+          "order_status": 0,
+          "other": 8,
+          "payment_issue": 0,
+          "product_question": 1,
+          "refund_request": 0,
+          "shipping_address_change": 0,
+          "spam": 0
+        },
+        "payment_issue": {
+          "abuse_or_legal": 0,
+          "complaint": 0,
+          "order_status": 0,
+          "other": 1,
+          "payment_issue": 8,
+          "product_question": 0,
+          "refund_request": 0,
+          "shipping_address_change": 0,
+          "spam": 0
+        },
+        "product_question": {
+          "abuse_or_legal": 0,
+          "complaint": 0,
+          "order_status": 0,
+          "other": 0,
+          "payment_issue": 0,
+          "product_question": 13,
+          "refund_request": 0,
+          "shipping_address_change": 0,
+          "spam": 0
+        },
+        "refund_request": {
+          "abuse_or_legal": 0,
+          "complaint": 0,
+          "order_status": 1,
+          "other": 0,
+          "payment_issue": 0,
+          "product_question": 0,
+          "refund_request": 9,
+          "shipping_address_change": 0,
+          "spam": 0
+        },
+        "shipping_address_change": {
+          "abuse_or_legal": 0,
+          "complaint": 0,
+          "order_status": 0,
+          "other": 0,
+          "payment_issue": 0,
+          "product_question": 0,
+          "refund_request": 0,
+          "shipping_address_change": 8,
+          "spam": 0
+        },
+        "spam": {
+          "abuse_or_legal": 0,
+          "complaint": 0,
+          "order_status": 0,
+          "other": 0,
+          "payment_issue": 0,
+          "product_question": 0,
+          "refund_request": 0,
+          "shipping_address_change": 0,
+          "spam": 5
+        }
+      },
+      "confusion_total": 87,
+      "dev_constraint_met": true,
+      "dev_routing": {
+        "auto_error": 0.0,
+        "coverage": 0.1111111111111111,
+        "human_share": 0.8888888888888888,
+        "n_auto": 7,
+        "n_auto_error": 0,
+        "n_human": 56,
+        "tau": 0.95
+      },
+      "ece": {
+        "bins": [
+          {
+            "accuracy": 0.0,
+            "bin": 0,
+            "confidence": 0.0,
+            "count": 0
+          },
+          {
+            "accuracy": 1.0,
+            "bin": 1,
+            "confidence": 0.36,
+            "count": 8
+          },
+          {
+            "accuracy": 0.0,
+            "bin": 2,
+            "confidence": 0.41,
+            "count": 3
+          },
+          {
+            "accuracy": 0.0,
+            "bin": 3,
+            "confidence": 0.0,
+            "count": 0
+          },
+          {
+            "accuracy": 1.0,
+            "bin": 4,
+            "confidence": 0.8503947368421052,
+            "count": 76
+          }
+        ],
+        "ece": 0.20367816091954027
+      },
+      "macro_f1": 0.9667107492769689,
+      "macro_f1_ci95": {
+        "high": 1.0,
+        "low": 0.9164430684554523,
+        "n": 87.0,
+        "n_boot": 1000.0,
+        "point": 0.9667107492769689
+      },
+      "n_dev": 63,
+      "n_test": 87,
+      "per_class": {
+        "abuse_or_legal": {
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "support": 10
+        },
+        "complaint": {
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "support": 11
+        },
+        "order_status": {
+          "f1": 0.9600000000000001,
+          "precision": 0.9230769230769231,
+          "recall": 1.0,
+          "support": 12
+        },
+        "other": {
+          "f1": 0.8888888888888888,
+          "precision": 0.8888888888888888,
+          "recall": 0.8888888888888888,
+          "support": 9
+        },
+        "payment_issue": {
+          "f1": 0.9411764705882353,
+          "precision": 1.0,
+          "recall": 0.8888888888888888,
+          "support": 9
+        },
+        "product_question": {
+          "f1": 0.962962962962963,
+          "precision": 0.9285714285714286,
+          "recall": 1.0,
+          "support": 13
+        },
+        "refund_request": {
+          "f1": 0.9473684210526316,
+          "precision": 1.0,
+          "recall": 0.9,
+          "support": 10
+        },
+        "shipping_address_change": {
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "support": 8
+        },
+        "spam": {
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "support": 5
+        }
+      },
+      "provider": "cascade",
+      "simulated_profile": true,
+      "slices": {
+        "difficulty": {
+          "easy": {
+            "accuracy": 1.0,
+            "n": 55
+          },
+          "hard": {
+            "accuracy": 0.9583333333333334,
+            "n": 24
+          },
+          "medium": {
+            "accuracy": 0.75,
+            "n": 8
+          }
+        },
+        "lang": {
+          "en": {
+            "accuracy": 0.9714285714285714,
+            "n": 35
+          },
+          "es": {
+            "accuracy": 0.9615384615384616,
+            "n": 52
+          }
+        },
+        "length": {
+          "len:short": {
+            "accuracy": 0.9655172413793104,
+            "n": 87
+          }
+        }
+      },
+      "tau": 0.95,
+      "test_routing": {
+        "auto_error": 0.0,
+        "coverage": 0.1724137931034483,
+        "human_share": 0.8275862068965517,
+        "n_auto": 15,
+        "n_auto_error": 0,
+        "n_human": 72,
+        "tau": 0.95
+      },
+      "token_note": "simulated char/4 heuristic plus profile overhead, not a tokenizer"
+    },
+    "large_sim": {
+      "accuracy": 0.9655172413793104,
+      "accuracy_ci95": {
+        "high": 1.0,
+        "low": 0.9310344827586207,
+        "n": 87.0,
+        "n_boot": 1000.0,
+        "point": 0.9655172413793104
+      },
+      "avg_tokens_in": 735.816091954023,
+      "avg_tokens_out": 130.0,
+      "confusion": {
+        "abuse_or_legal": {
+          "abuse_or_legal": 10,
+          "complaint": 0,
+          "order_status": 0,
+          "other": 0,
+          "payment_issue": 0,
+          "product_question": 0,
+          "refund_request": 0,
+          "shipping_address_change": 0,
+          "spam": 0
+        },
+        "complaint": {
+          "abuse_or_legal": 0,
+          "complaint": 11,
+          "order_status": 0,
+          "other": 0,
+          "payment_issue": 0,
+          "product_question": 0,
+          "refund_request": 0,
+          "shipping_address_change": 0,
+          "spam": 0
+        },
+        "order_status": {
+          "abuse_or_legal": 0,
+          "complaint": 0,
+          "order_status": 12,
+          "other": 0,
+          "payment_issue": 0,
+          "product_question": 0,
+          "refund_request": 0,
+          "shipping_address_change": 0,
+          "spam": 0
+        },
+        "other": {
+          "abuse_or_legal": 0,
+          "complaint": 0,
+          "order_status": 0,
+          "other": 8,
+          "payment_issue": 0,
+          "product_question": 1,
+          "refund_request": 0,
+          "shipping_address_change": 0,
+          "spam": 0
+        },
+        "payment_issue": {
+          "abuse_or_legal": 0,
+          "complaint": 0,
+          "order_status": 0,
+          "other": 1,
+          "payment_issue": 8,
+          "product_question": 0,
+          "refund_request": 0,
+          "shipping_address_change": 0,
+          "spam": 0
+        },
+        "product_question": {
+          "abuse_or_legal": 0,
+          "complaint": 0,
+          "order_status": 0,
+          "other": 0,
+          "payment_issue": 0,
+          "product_question": 13,
+          "refund_request": 0,
+          "shipping_address_change": 0,
+          "spam": 0
+        },
+        "refund_request": {
+          "abuse_or_legal": 0,
+          "complaint": 0,
+          "order_status": 1,
+          "other": 0,
+          "payment_issue": 0,
+          "product_question": 0,
+          "refund_request": 9,
+          "shipping_address_change": 0,
+          "spam": 0
+        },
+        "shipping_address_change": {
+          "abuse_or_legal": 0,
+          "complaint": 0,
+          "order_status": 0,
+          "other": 0,
+          "payment_issue": 0,
+          "product_question": 0,
+          "refund_request": 0,
+          "shipping_address_change": 8,
+          "spam": 0
+        },
+        "spam": {
+          "abuse_or_legal": 0,
+          "complaint": 0,
+          "order_status": 0,
+          "other": 0,
+          "payment_issue": 0,
+          "product_question": 0,
+          "refund_request": 0,
+          "shipping_address_change": 0,
+          "spam": 5
+        }
+      },
+      "confusion_total": 87,
+      "dev_constraint_met": true,
+      "dev_routing": {
+        "auto_error": 0.0,
+        "coverage": 0.23809523809523808,
+        "human_share": 0.7619047619047619,
+        "n_auto": 15,
+        "n_auto_error": 0,
+        "n_human": 48,
+        "tau": 0.9
+      },
+      "ece": {
+        "bins": [
+          {
+            "accuracy": 0.0,
+            "bin": 0,
+            "confidence": 0.0,
+            "count": 0
+          },
+          {
+            "accuracy": 1.0,
+            "bin": 1,
+            "confidence": 0.36,
+            "count": 8
+          },
+          {
+            "accuracy": 0.0,
+            "bin": 2,
+            "confidence": 0.41,
+            "count": 3
+          },
+          {
+            "accuracy": 0.0,
+            "bin": 3,
+            "confidence": 0.0,
+            "count": 0
+          },
+          {
+            "accuracy": 1.0,
+            "bin": 4,
+            "confidence": 0.8503947368421052,
+            "count": 76
+          }
+        ],
+        "ece": 0.20367816091954027
+      },
+      "macro_f1": 0.9667107492769689,
+      "macro_f1_ci95": {
+        "high": 1.0,
+        "low": 0.9164430684554523,
+        "n": 87.0,
+        "n_boot": 1000.0,
+        "point": 0.9667107492769689
+      },
+      "n_dev": 63,
+      "n_test": 87,
+      "per_class": {
+        "abuse_or_legal": {
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "support": 10
+        },
+        "complaint": {
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "support": 11
+        },
+        "order_status": {
+          "f1": 0.9600000000000001,
+          "precision": 0.9230769230769231,
+          "recall": 1.0,
+          "support": 12
+        },
+        "other": {
+          "f1": 0.8888888888888888,
+          "precision": 0.8888888888888888,
+          "recall": 0.8888888888888888,
+          "support": 9
+        },
+        "payment_issue": {
+          "f1": 0.9411764705882353,
+          "precision": 1.0,
+          "recall": 0.8888888888888888,
+          "support": 9
+        },
+        "product_question": {
+          "f1": 0.962962962962963,
+          "precision": 0.9285714285714286,
+          "recall": 1.0,
+          "support": 13
+        },
+        "refund_request": {
+          "f1": 0.9473684210526316,
+          "precision": 1.0,
+          "recall": 0.9,
+          "support": 10
+        },
+        "shipping_address_change": {
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "support": 8
+        },
+        "spam": {
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "support": 5
+        }
+      },
+      "provider": "large_sim",
+      "simulated_profile": true,
+      "slices": {
+        "difficulty": {
+          "easy": {
+            "accuracy": 1.0,
+            "n": 55
+          },
+          "hard": {
+            "accuracy": 0.9583333333333334,
+            "n": 24
+          },
+          "medium": {
+            "accuracy": 0.75,
+            "n": 8
+          }
+        },
+        "lang": {
+          "en": {
+            "accuracy": 0.9714285714285714,
+            "n": 35
+          },
+          "es": {
+            "accuracy": 0.9615384615384616,
+            "n": 52
+          }
+        },
+        "length": {
+          "len:short": {
+            "accuracy": 0.9655172413793104,
+            "n": 87
+          }
+        }
+      },
+      "tau": 0.9,
+      "test_routing": {
+        "auto_error": 0.0,
+        "coverage": 0.40229885057471265,
+        "human_share": 0.5977011494252874,
+        "n_auto": 35,
+        "n_auto_error": 0,
+        "n_human": 52,
+        "tau": 0.9
+      },
+      "token_note": "simulated char/4 heuristic plus profile overhead, not a tokenizer"
+    },
+    "rules_baseline": {
+      "accuracy": 0.7701149425287356,
+      "accuracy_ci95": {
+        "high": 0.8620689655172413,
+        "low": 0.6781609195402298,
+        "n": 87.0,
+        "n_boot": 1000.0,
+        "point": 0.7701149425287356
+      },
+      "avg_tokens_in": 103.816091954023,
+      "avg_tokens_out": 36.0,
+      "confusion": {
+        "abuse_or_legal": {
+          "abuse_or_legal": 7,
+          "complaint": 0,
+          "order_status": 0,
+          "other": 3,
+          "payment_issue": 0,
+          "product_question": 0,
+          "refund_request": 0,
+          "shipping_address_change": 0,
+          "spam": 0
+        },
+        "complaint": {
+          "abuse_or_legal": 0,
+          "complaint": 10,
+          "order_status": 0,
+          "other": 0,
+          "payment_issue": 0,
+          "product_question": 0,
+          "refund_request": 1,
+          "shipping_address_change": 0,
+          "spam": 0
+        },
+        "order_status": {
+          "abuse_or_legal": 0,
+          "complaint": 0,
+          "order_status": 10,
+          "other": 1,
+          "payment_issue": 0,
+          "product_question": 0,
+          "refund_request": 1,
+          "shipping_address_change": 0,
+          "spam": 0
+        },
+        "other": {
+          "abuse_or_legal": 0,
+          "complaint": 0,
+          "order_status": 0,
+          "other": 9,
+          "payment_issue": 0,
+          "product_question": 0,
+          "refund_request": 0,
+          "shipping_address_change": 0,
+          "spam": 0
+        },
+        "payment_issue": {
+          "abuse_or_legal": 0,
+          "complaint": 0,
+          "order_status": 0,
+          "other": 2,
+          "payment_issue": 6,
+          "product_question": 0,
+          "refund_request": 1,
+          "shipping_address_change": 0,
+          "spam": 0
+        },
+        "product_question": {
+          "abuse_or_legal": 0,
+          "complaint": 0,
+          "order_status": 1,
+          "other": 3,
+          "payment_issue": 0,
+          "product_question": 8,
+          "refund_request": 1,
+          "shipping_address_change": 0,
+          "spam": 0
+        },
+        "refund_request": {
+          "abuse_or_legal": 0,
+          "complaint": 0,
+          "order_status": 0,
+          "other": 3,
+          "payment_issue": 0,
+          "product_question": 0,
+          "refund_request": 7,
+          "shipping_address_change": 0,
+          "spam": 0
+        },
+        "shipping_address_change": {
+          "abuse_or_legal": 0,
+          "complaint": 0,
+          "order_status": 0,
+          "other": 3,
+          "payment_issue": 0,
+          "product_question": 0,
+          "refund_request": 0,
+          "shipping_address_change": 5,
+          "spam": 0
+        },
+        "spam": {
+          "abuse_or_legal": 0,
+          "complaint": 0,
+          "order_status": 0,
+          "other": 0,
+          "payment_issue": 0,
+          "product_question": 0,
+          "refund_request": 0,
+          "shipping_address_change": 0,
+          "spam": 5
+        }
+      },
+      "confusion_total": 87,
+      "dev_constraint_met": false,
+      "dev_routing": {
+        "auto_error": 0.14285714285714285,
+        "coverage": 0.1111111111111111,
+        "human_share": 0.8888888888888888,
+        "n_auto": 7,
+        "n_auto_error": 1,
+        "n_human": 56,
+        "tau": 0.99
+      },
+      "ece": {
+        "bins": [
+          {
+            "accuracy": 0.0,
+            "bin": 0,
+            "confidence": 0.0,
+            "count": 0
+          },
+          {
+            "accuracy": 0.375,
+            "bin": 1,
+            "confidence": 0.33,
+            "count": 24
+          },
+          {
+            "accuracy": 0.0,
+            "bin": 2,
+            "confidence": 0.0,
+            "count": 0
+          },
+          {
+            "accuracy": 0.9193548387096774,
+            "bin": 3,
+            "confidence": 0.6783870967741936,
+            "count": 62
+          },
+          {
+            "accuracy": 1.0,
+            "bin": 4,
+            "confidence": 0.9299999999999999,
+            "count": 1
+          }
+        ],
+        "ece": 0.18494252873563213
+      },
+      "macro_f1": 0.7987480360881896,
+      "macro_f1_ci95": {
+        "high": 0.8681414446120328,
+        "low": 0.6985054474618042,
+        "n": 87.0,
+        "n_boot": 1000.0,
+        "point": 0.7987480360881896
+      },
+      "n_dev": 63,
+      "n_test": 87,
+      "per_class": {
+        "abuse_or_legal": {
+          "f1": 0.8235294117647058,
+          "precision": 1.0,
+          "recall": 0.7,
+          "support": 10
+        },
+        "complaint": {
+          "f1": 0.9523809523809523,
+          "precision": 1.0,
+          "recall": 0.9090909090909091,
+          "support": 11
+        },
+        "order_status": {
+          "f1": 0.8695652173913043,
+          "precision": 0.9090909090909091,
+          "recall": 0.8333333333333334,
+          "support": 12
+        },
+        "other": {
+          "f1": 0.5454545454545454,
+          "precision": 0.375,
+          "recall": 1.0,
+          "support": 9
+        },
+        "payment_issue": {
+          "f1": 0.8,
+          "precision": 1.0,
+          "recall": 0.6666666666666666,
+          "support": 9
+        },
+        "product_question": {
+          "f1": 0.761904761904762,
+          "precision": 1.0,
+          "recall": 0.6153846153846154,
+          "support": 13
+        },
+        "refund_request": {
+          "f1": 0.6666666666666666,
+          "precision": 0.6363636363636364,
+          "recall": 0.7,
+          "support": 10
+        },
+        "shipping_address_change": {
+          "f1": 0.7692307692307693,
+          "precision": 1.0,
+          "recall": 0.625,
+          "support": 8
+        },
+        "spam": {
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "support": 5
+        }
+      },
+      "provider": "rules_baseline",
+      "simulated_profile": true,
+      "slices": {
+        "difficulty": {
+          "easy": {
+            "accuracy": 1.0,
+            "n": 55
+          },
+          "hard": {
+            "accuracy": 0.16666666666666666,
+            "n": 24
+          },
+          "medium": {
+            "accuracy": 1.0,
+            "n": 8
+          }
+        },
+        "lang": {
+          "en": {
+            "accuracy": 0.8,
+            "n": 35
+          },
+          "es": {
+            "accuracy": 0.75,
+            "n": 52
+          }
+        },
+        "length": {
+          "len:short": {
+            "accuracy": 0.7701149425287356,
+            "n": 87
+          }
+        }
+      },
+      "tau": 0.99,
+      "test_routing": {
+        "auto_error": 0.0,
+        "coverage": 0.12643678160919541,
+        "human_share": 0.8735632183908046,
+        "n_auto": 11,
+        "n_auto_error": 0,
+        "n_human": 76,
+        "tau": 0.99
+      },
+      "token_note": "simulated char/4 heuristic plus profile overhead, not a tokenizer"
+    },
+    "small_sim": {
+      "accuracy": 0.6436781609195402,
+      "accuracy_ci95": {
+        "high": 0.7471264367816092,
+        "low": 0.5402298850574713,
+        "n": 87.0,
+        "n_boot": 1000.0,
+        "point": 0.6436781609195402
+      },
+      "avg_tokens_in": 255.816091954023,
+      "avg_tokens_out": 80.0,
+      "confusion": {
+        "abuse_or_legal": {
+          "abuse_or_legal": 6,
+          "complaint": 0,
+          "order_status": 0,
+          "other": 3,
+          "payment_issue": 0,
+          "product_question": 1,
+          "refund_request": 0,
+          "shipping_address_change": 0,
+          "spam": 0
+        },
+        "complaint": {
+          "abuse_or_legal": 0,
+          "complaint": 10,
+          "order_status": 0,
+          "other": 0,
+          "payment_issue": 0,
+          "product_question": 0,
+          "refund_request": 1,
+          "shipping_address_change": 0,
+          "spam": 0
+        },
+        "order_status": {
+          "abuse_or_legal": 0,
+          "complaint": 0,
+          "order_status": 8,
+          "other": 1,
+          "payment_issue": 2,
+          "product_question": 0,
+          "refund_request": 1,
+          "shipping_address_change": 0,
+          "spam": 0
+        },
+        "other": {
+          "abuse_or_legal": 0,
+          "complaint": 0,
+          "order_status": 0,
+          "other": 8,
+          "payment_issue": 1,
+          "product_question": 0,
+          "refund_request": 0,
+          "shipping_address_change": 0,
+          "spam": 0
+        },
+        "payment_issue": {
+          "abuse_or_legal": 0,
+          "complaint": 0,
+          "order_status": 0,
+          "other": 2,
+          "payment_issue": 4,
+          "product_question": 0,
+          "refund_request": 1,
+          "shipping_address_change": 2,
+          "spam": 0
+        },
+        "product_question": {
+          "abuse_or_legal": 1,
+          "complaint": 0,
+          "order_status": 1,
+          "other": 2,
+          "payment_issue": 0,
+          "product_question": 6,
+          "refund_request": 3,
+          "shipping_address_change": 0,
+          "spam": 0
+        },
+        "refund_request": {
+          "abuse_or_legal": 1,
+          "complaint": 0,
+          "order_status": 1,
+          "other": 3,
+          "payment_issue": 0,
+          "product_question": 0,
+          "refund_request": 5,
+          "shipping_address_change": 0,
+          "spam": 0
+        },
+        "shipping_address_change": {
+          "abuse_or_legal": 0,
+          "complaint": 0,
+          "order_status": 0,
+          "other": 3,
+          "payment_issue": 0,
+          "product_question": 1,
+          "refund_request": 0,
+          "shipping_address_change": 4,
+          "spam": 0
+        },
+        "spam": {
+          "abuse_or_legal": 0,
+          "complaint": 0,
+          "order_status": 0,
+          "other": 0,
+          "payment_issue": 0,
+          "product_question": 0,
+          "refund_request": 0,
+          "shipping_address_change": 0,
+          "spam": 5
+        }
+      },
+      "confusion_total": 87,
+      "dev_constraint_met": false,
+      "dev_routing": {
+        "auto_error": 0.2857142857142857,
+        "coverage": 0.1111111111111111,
+        "human_share": 0.8888888888888888,
+        "n_auto": 7,
+        "n_auto_error": 2,
+        "n_human": 56,
+        "tau": 0.99
+      },
+      "ece": {
+        "bins": [
+          {
+            "accuracy": 0.0,
+            "bin": 0,
+            "confidence": 0.0,
+            "count": 0
+          },
+          {
+            "accuracy": 0.0,
+            "bin": 1,
+            "confidence": 0.0,
+            "count": 0
+          },
+          {
+            "accuracy": 0.8571428571428571,
+            "bin": 2,
+            "confidence": 0.5900428571428572,
+            "count": 7
+          },
+          {
+            "accuracy": 0.5675675675675675,
+            "bin": 3,
+            "confidence": 0.6870999999999999,
+            "count": 37
+          },
+          {
+            "accuracy": 0.6744186046511628,
+            "bin": 4,
+            "confidence": 0.8806465116279071,
+            "count": 43
+          }
+        ],
+        "ece": 0.17425517241379312
+      },
+      "macro_f1": 0.6646107775140033,
+      "macro_f1_ci95": {
+        "high": 0.7515440348526901,
+        "low": 0.5522678475577026,
+        "n": 87.0,
+        "n_boot": 1000.0,
+        "point": 0.6646107775140033
+      },
+      "n_dev": 63,
+      "n_test": 87,
+      "per_class": {
+        "abuse_or_legal": {
+          "f1": 0.6666666666666665,
+          "precision": 0.75,
+          "recall": 0.6,
+          "support": 10
+        },
+        "complaint": {
+          "f1": 0.9523809523809523,
+          "precision": 1.0,
+          "recall": 0.9090909090909091,
+          "support": 11
+        },
+        "order_status": {
+          "f1": 0.7272727272727272,
+          "precision": 0.8,
+          "recall": 0.6666666666666666,
+          "support": 12
+        },
+        "other": {
+          "f1": 0.5161290322580644,
+          "precision": 0.36363636363636365,
+          "recall": 0.8888888888888888,
+          "support": 9
+        },
+        "payment_issue": {
+          "f1": 0.5,
+          "precision": 0.5714285714285714,
+          "recall": 0.4444444444444444,
+          "support": 9
+        },
+        "product_question": {
+          "f1": 0.5714285714285714,
+          "precision": 0.75,
+          "recall": 0.46153846153846156,
+          "support": 13
+        },
+        "refund_request": {
+          "f1": 0.47619047619047616,
+          "precision": 0.45454545454545453,
+          "recall": 0.5,
+          "support": 10
+        },
+        "shipping_address_change": {
+          "f1": 0.5714285714285715,
+          "precision": 0.6666666666666666,
+          "recall": 0.5,
+          "support": 8
+        },
+        "spam": {
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "support": 5
+        }
+      },
+      "provider": "small_sim",
+      "simulated_profile": true,
+      "slices": {
+        "difficulty": {
+          "easy": {
+            "accuracy": 0.8,
+            "n": 55
+          },
+          "hard": {
+            "accuracy": 0.16666666666666666,
+            "n": 24
+          },
+          "medium": {
+            "accuracy": 1.0,
+            "n": 8
+          }
+        },
+        "lang": {
+          "en": {
+            "accuracy": 0.6857142857142857,
+            "n": 35
+          },
+          "es": {
+            "accuracy": 0.6153846153846154,
+            "n": 52
+          }
+        },
+        "length": {
+          "len:short": {
+            "accuracy": 0.6436781609195402,
+            "n": 87
+          }
+        }
+      },
+      "tau": 0.99,
+      "test_routing": {
+        "auto_error": 0.16666666666666666,
+        "coverage": 0.13793103448275862,
+        "human_share": 0.8620689655172413,
+        "n_auto": 12,
+        "n_auto_error": 2,
+        "n_human": 75,
+        "tau": 0.99
+      },
+      "token_note": "simulated char/4 heuristic plus profile overhead, not a tokenizer"
+    }
+  },
+  "providers_are": "simulated profiles; accuracy is not a real-model measurement",
+  "real_providers": "none yet",
+  "version": "0.1.0",
+  "violation_count": 0
+}

@@ -1,14 +1,14 @@
 # llm-triage-routing-lab
 
-All providers in CI are deterministic fakes: this repo tests the harness, the invariants and the controls, not model quality. Real-model results: none yet.
+All providers in CI are deterministic fakes: this repo tests the harness, the invariants and the controls, not model quality. Real-model quality comparison: re-verification pending.
 
-Measured with real providers: none yet.
+Measured with real providers: 2026-10-17, `grok-4.20-0309-non-reasoning`, command `python -m triage_lab live --split test --max-tickets 40`, **0/40** schema-valid (the prompt listed no taxonomy). Corrected in this repo. Re-verification pending.
 
 ## Problem and result
 
 A support inbox needs a classifier that cannot be talked into a refund or an auto-reply. The measured result is the control gate, not a model score.
 
-On 2026-10-17, package 0.1.0, commit `283f08ecee0aca3f088bc045aa87e2d392687fb3`, command `python -m triage_lab eval`: **0 invariant failures**. Attack block rate **1.000** (22/22) and benign over-block rate **0.000** (0/10) on the known-marker adversarial file (`data/adversarial.jsonl`). I1–I6 each 34 pass / 0 fail; I7 1 pass / 0 fail. Profile accuracy below is simulated and is not this result.
+On 2026-10-17, package 0.1.0, commit `22d5abc957dfa102eb9a5d3745a543e0111a338a`, command `python -m triage_lab eval`: **0 invariant failures**. Attack block rate **1.000** (22/22) and benign over-block rate **0.000** (0/10) on the known-marker adversarial file (`data/adversarial.jsonl`). I1–I6 each 34 pass / 0 fail; I7 1 pass / 0 fail. Profile accuracy below is simulated and is not this result.
 
 ## Demo
 
@@ -36,14 +36,14 @@ flowchart LR
 
 ## Results
 
-Fake-vs-fake. `small_sim` flips about 1 in 5 ids and `large_sim` about 1 in 17; those rates are configured, so their accuracy is **simulated by construction**. `rules_baseline` is a keyword lexicon, still a fake. n is messages: dev 63, test 87, golden 150. Bootstrap 95% CI, 1000 resamples, seed 7, over test messages. Date 2026-10-17. Command `python -m triage_lab eval`. Commit `283f08ecee0aca3f088bc045aa87e2d392687fb3`.
+Fake-vs-fake. `small_sim` flips about 1 in 5 ids and `large_sim` about 1 in 17; those rates are configured, so their accuracy is **simulated by construction**. `rules_baseline` is a keyword lexicon, still a fake. n is messages: dev 63, test 87, golden 150. Bootstrap 95% CI, 1000 resamples, seed 7, over test messages. Date 2026-10-17. Command `python -m triage_lab eval`. Commit `22d5abc957dfa102eb9a5d3745a543e0111a338a`. Simulated token counts include the taxonomy prompt.
 
 | Profile | Test accuracy (95% CI) | Macro-F1 | ECE | Tau | Dev constraint | Test coverage | Test auto-error | Human share | Sim. tokens in/out |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| rules_baseline | 0.7701 [0.6782, 0.8621] | 0.7987 | 0.1849 | 0.99 | not met | 0.1264 | 0.0000 (0/11) | 0.8736 | 103.8 / 36 |
-| small_sim | 0.6437 [0.5402, 0.7471] | 0.6646 | 0.1743 | 0.99 | not met | 0.1379 | 0.1667 (2/12) | 0.8621 | 255.8 / 80 |
-| large_sim | 0.9655 [0.9310, 1.0000] | 0.9667 | 0.2037 | 0.90 | met | 0.4023 | 0.0000 (0/35) | 0.5977 | 735.8 / 130 |
-| cascade | 0.9655 [0.9310, 1.0000] | 0.9667 | 0.2037 | 0.95 | met | 0.1724 | 0.0000 (0/15) | 0.8276 | 991.6 / 210 |
+| rules_baseline | 0.7701 [0.6782, 0.8621] | 0.7987 | 0.1849 | 0.99 | not met | 0.1264 | 0.0000 (0/11) | 0.8736 | 357.2 / 36 |
+| small_sim | 0.6437 [0.5402, 0.7471] | 0.6646 | 0.1743 | 0.99 | not met | 0.1379 | 0.1667 (2/12) | 0.8621 | 509.2 / 80 |
+| large_sim | 0.9655 [0.9310, 1.0000] | 0.9667 | 0.2037 | 0.90 | met | 0.4023 | 0.0000 (0/35) | 0.5977 | 989.2 / 130 |
+| cascade | 0.9655 [0.9310, 1.0000] | 0.9667 | 0.2037 | 0.95 | met | 0.1724 | 0.0000 (0/15) | 0.8276 | 1498.4 / 210 |
 
 Exact McNemar on the same 87 test messages (harness check only): large vs small, 32 discordant, p < 0.0001; large vs rules, 21 discordant, p 0.0002; small vs rules, 11 discordant, p 0.0010.
 
@@ -51,7 +51,7 @@ Forced regression, `python -m triage_lab eval --regression` (`naive_sim`, saniti
 
 Confusion matrices: `docs/results/`.
 
-Illustrative cost at the [EST] prices above, from the simulated token counts: rules 0.000212 USD/ticket (0.212 / 1k), small 0.000496 (0.496 / 1k), large 0.001126 (1.126 / 1k), cascade 0.001622 (1.622 / 1k). Latency: not measured.
+Illustrative cost at the [EST] prices above, from the simulated token counts: rules 0.000465 USD/ticket (0.465 / 1k), small 0.000749 (0.749 / 1k), large 0.001379 (1.379 / 1k), cascade 0.002128 (2.128 / 1k). This estimate ignores cached tokens. Latency: not measured.
 
 ## Use cases, governance and business strategy
 
@@ -107,7 +107,7 @@ Dockerfile provided, not built in CI. No local image build: container tooling wa
 | Item | Status |
 | --- | --- |
 | Taxonomy, pipeline, fakes, gate, shadow, kill switch | Implemented |
-| Live adapter (off by default) | Implemented, not run |
+| Live adapter (off by default) | implementado; verificación live: el primer intento clasificó 0/40 por prompt sin taxonomía (corregido en este PR); re-verificación pendiente |
 | SFT export to a local JSONL | Implemented; design-only (no train, no upload) |
 | Fine-tuning, IMAP/webhook, helpdesk, SSO/RBAC | Design only |
 | Languages beyond es/en, production drift, PII redaction service | Design only |
@@ -132,7 +132,7 @@ Also: `python -m triage_lab data generate --seed 7` and `python -m triage_lab da
 
 ## Next steps
 
-Fill `docs/LIVE_RUN_TEMPLATE.md` after a capped live run. Do not treat simulated accuracy as a launch metric. Add attacks outside the known marker list before any auto-reply is allowed outside this lab.
+Re-run the capped live check after this prompt fix and fill the empty cells in `docs/LIVE_RUN_TEMPLATE.md`. Do not treat simulated accuracy as a launch metric. Add attacks outside the known marker list before any auto-reply is allowed outside this lab.
 
 ## Docs
 

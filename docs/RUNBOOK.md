@@ -6,7 +6,7 @@ Roles: taxonomy owner, tau approver, security, on-call. This lab has no pager.
 
 - Default: `python -m triage_lab eval` and `python -m triage_lab demo`. No network.
 - Shadow a file: `python -m triage_lab shadow --input data/golden.jsonl`. Effects: none.
-- Live, only when the owner sets env and accepts the cap: `LIVE_LLM=1`, `MAX_LIVE_SPEND_USD` > 0, prices or `MAX_LIVE_TOKENS`, then `python -m triage_lab live --split test --max-tickets 40 --models "$LLM_MODELS"`. Never in CI.
+- Live, only when the owner sets env and accepts the cap: `LIVE_LLM=1`, `MAX_LIVE_SPEND_USD` > 0, and a price row per model in `LLM_MODEL_PRICE_TABLE` (or `MAX_LIVE_TOKENS` when no price is set and cost stays `unknown`). A missing model price aborts before the call. The ledger cost ignores cached tokens. Then `python -m triage_lab live --split test --max-tickets 40 --models "$LLM_MODELS"`. Never in CI.
 
 ## Monitor
 

@@ -1,8 +1,8 @@
 # llm-triage-routing-lab
 
-All providers in CI are deterministic fakes: this repo tests the harness, the invariants and the controls, not model quality. Real-model quality from the third live check is on the next line (n=87).
+All providers in CI are deterministic fakes: this repo tests the harness, the invariants and the controls, not model quality. Real-model quality, medido por verificación independiente, is on the next line (n=87).
 
-Measured with real providers: 2026-10-17, third check on the test split, n=87, schema-valid 87/87, accuracy 82/87. The model name and the token cost were not stored here. Attack and benign rates are printed only with n. A denominator of 0 is n/a, not 0. n from 1 to 4 is `n=..., no concluyente`.
+Measured with real providers: 2026-10-17, `grok-4.20-0309-non-reasoning`, temperature 0, test split, n=87, schema-valid 87/87. Two runs, medido por verificación independiente: accuracy 82/87 and 83/87, range **82–83/87** (83/87 is 95.4%). Last run cost US$0.0391; the repo estimate 0.0675 ignores cached tokens. Attack block rate on this split: n=4, no concluyente. Benign over-block: n/a (n=0).
 
 ## Problem and result
 
@@ -107,7 +107,7 @@ Dockerfile provided, not built in CI. No local image build: container tooling wa
 | Item | Status |
 | --- | --- |
 | Taxonomy, pipeline, fakes, gate, shadow, kill switch | Implemented |
-| Live adapter (off by default) | implementado; tercera verificación live 2026-10-17: schema 87/87, accuracy 82/87 (n=87). Tasas solo con n; n=0 es n/a |
+| Live adapter (off by default) | implementado; medido por verificación independiente 2026-10-17, `grok-4.20-0309-non-reasoning`, temperature 0: schema 87/87, accuracy 82–83/87 (n=87). Attack n=4, no concluyente; over-block n/a (n=0). Última corrida US$0.0391 (estimación del repo 0.0675, ignora tokens cacheados) |
 | SFT export to a local JSONL | Implemented; design-only (no train, no upload) |
 | Fine-tuning, IMAP/webhook, helpdesk, SSO/RBAC | Design only |
 | Languages beyond es/en, production drift, PII redaction service | Design only |
@@ -132,7 +132,7 @@ Also: `python -m triage_lab data generate --seed 7` and `python -m triage_lab da
 
 ## Next steps
 
-Re-run the capped live check after this prompt fix and fill the empty cells in `docs/LIVE_RUN_TEMPLATE.md`. Do not treat simulated accuracy as a launch metric. Add attacks outside the known marker list before any auto-reply is allowed outside this lab.
+Token counts for the n=87 live runs were not stored; leave those cells empty in `docs/LIVE_RUN_TEMPLATE.md`. Do not treat simulated accuracy as a launch metric. Add attacks outside the known marker list before any auto-reply is allowed outside this lab.
 
 ## Docs
 

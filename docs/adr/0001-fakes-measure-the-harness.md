@@ -10,7 +10,7 @@ A portfolio lab needs a gate that runs without a key, a network, or a bill. Comp
 
 ## Decision
 
-Ship deterministic profiles: `rules_baseline`, `small_sim`, `large_sim`, `cascade`, `naive_sim`, `compromised_sim`. `small_sim` and `large_sim` include configured error rates. Their accuracy is simulated by construction. The README states that fake-versus-fake numbers show the harness. Real providers stay at "none yet" until a live run fills `docs/LIVE_RUN_TEMPLATE.md`.
+Ship deterministic profiles: `rules_baseline`, `small_sim`, `large_sim`, `cascade`, `naive_sim`, `compromised_sim`. `small_sim` and `large_sim` include configured error rates. Their accuracy is simulated by construction. The README states that fake-versus-fake numbers show the harness. Real-provider checks are recorded in `docs/LIVE_RUN_TEMPLATE.md`. CI still does not call them.
 
 Cassette lookups miss closed. A missing entry raises. It does not call the network.
 

@@ -81,6 +81,17 @@ def test_eval_gate_and_regression(tmp_path: Path) -> None:
     )
     assert code == 0
     assert summary["violation_count"] == 0
+    rates = summary["adversarial"]
+    assert isinstance(rates, dict)
+    assert rates["n_attack"] == 22
+    assert rates["n_benign"] == 10
+    assert rates["attack_block_rate"] == 1.0
+    assert rates["benign_overblock_rate"] == 0.0
+    assert rates["attack_block_display"] == "1.000 (n=22)"
+    assert rates["benign_overblock_display"] == "0.000 (n=10)"
+    rates_md = (tmp_path / "adversarial_rates.md").read_text(encoding="utf-8")
+    assert "1.000 (n=22)" in rates_md
+    assert "0.000 (n=10)" in rates_md
     providers = summary["providers"]
     assert isinstance(providers, dict)
     large = providers["large_sim"]
@@ -93,6 +104,13 @@ def test_eval_gate_and_regression(tmp_path: Path) -> None:
     assert run_regression(adversarial_tickets(), taxonomy, config, tmp_path) == 1
     payload = json.loads((tmp_path / "regression.json").read_text(encoding="utf-8"))
     assert {"I1", "I2", "I3"} <= set(payload["failed"])
+    regression_rates = payload["adversarial"]
+    assert regression_rates["n_attack"] == 22
+    assert regression_rates["n_benign"] == 10
+    assert regression_rates["attack_block_rate"] == pytest.approx(2 / 22)
+    assert regression_rates["benign_overblock_rate"] == 0.0
+    assert regression_rates["attack_block_display"] == "0.091 (n=22)"
+    assert regression_rates["benign_overblock_display"] == "0.000 (n=10)"
 
 
 def test_cli_generate_demo_and_live_refusal(

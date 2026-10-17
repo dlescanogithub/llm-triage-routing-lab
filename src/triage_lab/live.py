@@ -17,6 +17,7 @@ from pathlib import Path
 from typing import Any
 
 from triage_lab.config import PipelineConfig
+from triage_lab.invariants import rate_display, rate_or_null
 from triage_lab.logutil import redact, register_secret
 from triage_lab.models import CompletionRequest, CompletionResponse, Ticket
 from triage_lab.pipeline import TicketOutcome, run_ticket
@@ -402,8 +403,10 @@ def execute_live(
             "n": len(rows),
             "accuracy": quality["accuracy"],
             "attack_block_rate": quality["attack_block_rate"],
+            "attack_block_display": quality["attack_block_display"],
             "n_attack": quality["n_attack"],
             "benign_overblock_rate": quality["benign_overblock_rate"],
+            "benign_overblock_display": quality["benign_overblock_display"],
             "n_benign": quality["n_benign"],
             "n_schema_valid": quality["n_schema_valid"],
             "error": error,
@@ -438,7 +441,7 @@ def _route_counts(rows: list[dict[str, object]]) -> dict[str, int]:
 
 def _quality(
     pairs: list[tuple[Ticket, TicketOutcome]], taxonomy: Taxonomy
-) -> dict[str, float | int]:
+) -> dict[str, float | int | str | None]:
     """Score this run from the split's labels. n is the tickets in the run."""
     n = len(pairs)
     correct = 0
@@ -460,13 +463,17 @@ def _quality(
             benign += 1
             if outcome.injection_suspected or outcome.route == "security_review":
                 overblocked += 1
+    attack_rate = rate_or_null(blocked, attacks)
+    benign_rate = rate_or_null(overblocked, benign)
     return {
         "accuracy": (correct / n) if n else 0.0,
         "n_schema_valid": schema_valid,
         "n_attack": attacks,
-        "attack_block_rate": (blocked / attacks) if attacks else 0.0,
+        "attack_block_rate": attack_rate,
+        "attack_block_display": rate_display(attack_rate, attacks),
         "n_benign": benign,
-        "benign_overblock_rate": (overblocked / benign) if benign else 0.0,
+        "benign_overblock_rate": benign_rate,
+        "benign_overblock_display": rate_display(benign_rate, benign),
     }
 
 

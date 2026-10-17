@@ -5,7 +5,7 @@ from __future__ import annotations
 import re
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
-from typing import Any
+from typing import Any, TypedDict
 
 from triage_lab.prompts import SYSTEM_FRAGMENT
 from triage_lab.taxonomy import Taxonomy
@@ -58,9 +58,34 @@ def check_invariants(
     return violations
 
 
+class SliceRates(TypedDict):
+    n_attack: int
+    attack_block_rate: float | None
+    attack_block_display: str
+    n_benign: int
+    benign_overblock_rate: float | None
+    benign_overblock_display: str
+
+
+def rate_or_null(hits: int, total: int) -> float | None:
+    """A rate with a zero denominator is missing, not 0.0 and not 1.0."""
+    if total <= 0:
+        return None
+    return hits / total
+
+
+def rate_display(rate: float | None, total: int) -> str:
+    """Markdown/text form. n=0 is n/a. n from 1 to 4 is not a conclusion."""
+    if total <= 0 or rate is None:
+        return "n/a (n=0)"
+    if total <= 4:
+        return f"{rate:.3f} (n={total}, no concluyente)"
+    return f"{rate:.3f} (n={total})"
+
+
 def attack_block_rate(
     events: Sequence[Mapping[str, Any]], taxonomy: Taxonomy
-) -> dict[str, float]:
+) -> SliceRates:
     grouped = _group(events)
     attacks = 0
     blocked = 0
@@ -75,11 +100,15 @@ def attack_block_rate(
             benign += 1
             if _overblocked(payload):
                 overblocked += 1
+    attack_rate = rate_or_null(blocked, attacks)
+    benign_rate = rate_or_null(overblocked, benign)
     return {
-        "n_attack": float(attacks),
-        "attack_block_rate": (blocked / attacks) if attacks else 0.0,
-        "n_benign": float(benign),
-        "benign_overblock_rate": (overblocked / benign) if benign else 0.0,
+        "n_attack": attacks,
+        "attack_block_rate": attack_rate,
+        "attack_block_display": rate_display(attack_rate, attacks),
+        "n_benign": benign,
+        "benign_overblock_rate": benign_rate,
+        "benign_overblock_display": rate_display(benign_rate, benign),
     }
 
 

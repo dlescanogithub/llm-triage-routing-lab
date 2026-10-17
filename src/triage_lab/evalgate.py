@@ -14,6 +14,7 @@ from triage_lab.config import PipelineConfig, repo_root, tau_override
 from triage_lab.datagen import length_tag
 from triage_lab.invariants import (
     Limits,
+    SliceRates,
     Violation,
     attack_block_rate,
     check_invariants,
@@ -385,7 +386,7 @@ def run_controlled_trace(
 
 def gate_result(
     trace: Trace, taxonomy: Taxonomy, config: PipelineConfig
-) -> tuple[list[Violation], dict[str, dict[str, int]], dict[str, float]]:
+) -> tuple[list[Violation], dict[str, dict[str, int]], SliceRates]:
     limits = Limits(
         max_attempts=config.max_attempts,
         max_tokens_per_ticket=config.max_tokens_per_ticket,
@@ -400,6 +401,40 @@ def gate_result(
     counts = counts_by_invariant(violations, len(message_ids))
     rates = attack_block_rate(trace.events, taxonomy)
     return violations, counts, rates
+
+
+def format_rates(rates: SliceRates) -> str:
+    return (
+        f"attack_block_rate={rates['attack_block_display']} "
+        f"benign_overblock_rate={rates['benign_overblock_display']}"
+    )
+
+
+def rates_markdown(
+    rates: SliceRates, *, command: str, generated_on: str, commit: str
+) -> str:
+    """Human report. A zero denominator is n/a, never 0.0 or 1.0."""
+    return (
+        "# Adversarial rates\n\n"
+        f"Generated: {generated_on} (UTC)\n\n"
+        f"Command: `{command}`\n\n"
+        f"Git commit: `{commit}`\n\n"
+        "Denominator 0 is JSON null and markdown n/a. "
+        "n from 1 to 4 is labelled no concluyente.\n\n"
+        "| Rate | n | JSON value | Display |\n"
+        "| --- | --- | --- | --- |\n"
+        f"| attack block | {rates['n_attack']} | "
+        f"{_json_rate(rates['attack_block_rate'])} | {rates['attack_block_display']} |\n"
+        f"| benign over-block | {rates['n_benign']} | "
+        f"{_json_rate(rates['benign_overblock_rate'])} | "
+        f"{rates['benign_overblock_display']} |\n"
+    )
+
+
+def _json_rate(rate: float | None) -> str:
+    if rate is None:
+        return "null"
+    return f"{rate:.3f}"
 
 
 def format_counts(counts: dict[str, dict[str, int]]) -> str:
@@ -530,10 +565,12 @@ def evaluate(
         )
         (results_dir / f"confusion_{name}.md").write_text(text, encoding="utf-8")
     print(format_counts(counts))
-    print(
-        "attack_block_rate={attack_block_rate:.3f} benign_overblock_rate={benign_overblock_rate:.3f}".format(
-            **rates
-        )
+    print(format_rates(rates))
+    (results_dir / "adversarial_rates.md").write_text(
+        rates_markdown(
+            rates, command=command, generated_on=generated_on, commit=commit
+        ),
+        encoding="utf-8",
     )
     _print_headline(reports)
     if violations:
@@ -557,11 +594,7 @@ def run_regression(
     )
     violations, counts, rates = gate_result(trace, taxonomy, config)
     print(format_counts(counts))
-    print(
-        "attack_block_rate={attack_block_rate:.3f} benign_overblock_rate={benign_overblock_rate:.3f}".format(
-            **rates
-        )
-    )
+    print(format_rates(rates))
     failed = {item.invariant for item in violations}
     payload = {
         "counts": counts,

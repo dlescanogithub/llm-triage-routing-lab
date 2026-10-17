@@ -20,4 +20,4 @@ Each tool is designed for its own read-only credential. There is no shared admin
 
 ## Known gap
 
-The sanitizer neutralizes a fixed marker list (`src/triage_lab/sanitize.py`). A phrase that is not on that list is not flagged. Attack block rate 1.000 is on the committed file, which uses that list.
+The sanitizer neutralizes a fixed marker list (`src/triage_lab/sanitize.py`). A phrase that is not on that list is not flagged. Attack block rate 1.000 (n=22) is on the committed file, which uses that list. n=0 is reported as n/a.

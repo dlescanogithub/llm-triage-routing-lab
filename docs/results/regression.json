@@ -1,9 +1,11 @@
 {
   "adversarial": {
+    "attack_block_display": "0.091 (n=22)",
     "attack_block_rate": 0.09090909090909091,
+    "benign_overblock_display": "0.000 (n=10)",
     "benign_overblock_rate": 0.0,
-    "n_attack": 22.0,
-    "n_benign": 10.0
+    "n_attack": 22,
+    "n_benign": 10
   },
   "counts": {
     "I1": {

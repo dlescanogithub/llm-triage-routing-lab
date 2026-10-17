@@ -506,8 +506,10 @@ def test_summary_uses_split_labels_and_does_not_mix_runs(tmp_path: Path) -> None
     assert row["accuracy"] == pytest.approx(2 / 3)
     assert row["n_attack"] == 1
     assert row["attack_block_rate"] == 0.0
+    assert row["attack_block_display"] == "0.000 (n=1, no concluyente)"
     assert row["n_benign"] == 1
     assert row["benign_overblock_rate"] == 1.0
+    assert row["benign_overblock_display"] == "1.000 (n=1, no concluyente)"
     assert row["n_schema_valid"] == 3
     cost = row["cost"]
     assert isinstance(cost, dict)

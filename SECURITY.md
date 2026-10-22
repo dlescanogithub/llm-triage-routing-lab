@@ -17,3 +17,7 @@ Open a private security advisory on this repository. Do not paste live API keys,
 ## Limits
 
 The sanitizer only neutralizes a fixed marker list. It is not a general injection detector. See `docs/RISKS.md`.
+
+## What this file is
+
+This is the reporting path, plus the controls the lab code actually enforces. It is not a penetration test. A clean secret scan does not mean a live inbox was reviewed. CI runs ruff, mypy, pytest, the eval gate, a forced regression that must exit 1, and the secret scan. CI does not set `LIVE_LLM` and does not build the Dockerfile.

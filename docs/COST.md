@@ -12,7 +12,7 @@ Human review: **[EST] USD 1.00 per escalated ticket**.
 | small_sim | error-profile fake, flip 1/5 | 509.207 / 80 | 0.000749 | 0.749 | not measured | simulated by construction | [EST] 2026-10-17 |
 | large_sim | error-profile fake, flip 1/17 | 989.207 / 130 | 0.001379 | 1.379 | not measured | simulated by construction | [EST] 2026-10-17 |
 | cascade | small, then large if confidence < tau | 1498.414 / 210 | 0.002128 | 2.128 | not measured | same labels as large on this draw; simulated | [EST] 2026-10-17 |
-| live | grok-4.20-0309-non-reasoning | not stored | not measured here | not measured | not measured | 82–83/87, n=87, medido por verificación independiente. First check 0/40: prompt sin taxonomía, corregido | 2026-10-17, last run US$0.0391 |
+| live | grok-4.20-0309-non-reasoning | not stored | not measured here | not measured | not measured | 82–83/87, n=87, measured by independent verification. First check 0/40: prompt without taxonomy, corrected | 2026-10-17, last run US$0.0391 |
 
 Arithmetic: `(tokens_in * 1.00 + tokens_out * 3.00) / 1e6`.
 
@@ -41,4 +41,4 @@ The blended column is almost entirely the human placeholder. Token price does no
 
 A comparative live check that used one price for every model recorded **0.0044 USD** for `grok-4.3` against about **0.0131 USD** at that model's own rate (2026-10-17, reported from the run, not recomputed here). `LLM_MODEL_PRICE_TABLE` now prices each model, and a missing row aborts before the call. Those live figures also ignore cached tokens.
 
-Independent checks the same day, medido por verificación independiente, used `grok-4.20-0309-non-reasoning` at temperature 0 on the test split (n=87): schema-valid 87/87, accuracy 82/87 and 83/87 (range 82–83/87; 83/87 is 95.4%). Last run cost US$0.0391. The repo estimate 0.0675 ignores cached tokens. Attack block on that split is n=4, no concluyente. Benign over-block is n/a (n=0). The earlier 0/40 result is history only: prompt sin taxonomía, corregido. The per-ticket [EST] rows above are unchanged.
+Independent checks the same day, measured by independent verification, used `grok-4.20-0309-non-reasoning` at temperature 0 on the test split (n=87): schema-valid 87/87, accuracy 82/87 and 83/87 (range 82–83/87; 83/87 is 95.4%). Last run cost US$0.0391. The repo estimate 0.0675 ignores cached tokens. Attack block on that split is n=4, no concluyente. Benign over-block is n/a (n=0). The earlier 0/40 result is history only: prompt without taxonomy, corrected. The per-ticket [EST] rows above are unchanged.

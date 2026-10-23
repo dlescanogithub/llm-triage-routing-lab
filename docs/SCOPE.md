@@ -4,7 +4,7 @@ No fees. The shop, the tickets, and the order numbers (`AB-000123`) are syntheti
 
 ## Assumptions
 
-- One inbox, two languages (es, en), nine categories, six routes.
+- One inbox, English, nine categories, six routes.
 - The classifier returns a schema. It does not send mail except through the fixed FAQ string after `auto_reply_faq`.
 - Refunds, charges, and account edits happen in another system after a person approves them.
 - Thresholds are fit on `split=dev` only.
@@ -24,7 +24,7 @@ Phases 1–4 are not done. Phase 0 is the implemented lab.
 
 ## Out of scope
 
-Fine-tuning, IMAP or webhook ingest, helpdesk connectors, SSO/RBAC, languages besides es/en, production drift monitors, a PII redaction service, and any write to a payment or account system.
+Fine-tuning, IMAP or webhook ingest, helpdesk connectors, SSO/RBAC, languages besides English, production drift monitors, a PII redaction service, and any write to a payment or account system.
 
 ## Exit criteria for the lab
 

@@ -12,7 +12,7 @@ Ten questions to ask before changing this lab into a deployment. Each answer mov
    A tight first-route SLA can justify auto-route on FAQ only. A tight human SLA means the human share is a staffing number, not only a safety number.
 
 4. **Which languages must be correct on day one?**
-   This lab is Spanish (rioplatense templates) and English. Another language is a new golden slice, not a prompt tweak. Coverage beyond es/en is design-only.
+   This lab is English. Another language is a new golden slice, not a prompt tweak. Coverage beyond English is design-only.
 
 5. **What must never be automatic?**
    Here: refunds, payments, account changes, and any `injection=true` message (no `auto_reply_faq`). If the shop adds "address change must be human", `shipping_address_change` moves to `human_review` in the YAML.

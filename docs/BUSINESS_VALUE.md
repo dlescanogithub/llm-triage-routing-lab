@@ -14,7 +14,7 @@
 
 ## Buyer and problem
 
-The buyer for this lab is the owner of one support inbox at the fictional shop. The inbox is Spanish and English, nine categories, six routes ([docs/SCOPE.md](SCOPE.md)).
+The buyer for this lab is the owner of one support inbox at the fictional shop. The inbox is English, nine categories, six routes ([docs/SCOPE.md](SCOPE.md)).
 
 Today the baseline is all-human triage ([docs/BUSINESS_CASE.md](BUSINESS_CASE.md)). Two costs sit on that baseline, both placeholders:
 
@@ -50,7 +50,7 @@ Four levers, in the order the cost notes say they matter.
 | Test human share | Productivity | All-human share is 1, by the [EST] baseline | No numeric target in the repo. Reported `large_sim` test share is 0.5977. `cascade` is 0.8276 | Test split of the named eval | SIMULATED. The all-human 1 is the [EST] baseline, not a count of staff |
 | Test auto-error among auto-routed | Quality | `large_sim` 0 of 35. `cascade` 0 of 15. `rules_baseline` 0 of 11 at tau 0.99, constraint not met. `small_sim` 2 of 12 | Reported, not tuned. The cap is the dev cap above | Same eval | SIMULATED |
 | Blended USD per ticket | Cost | 1.00 all-human [EST] | No target price. `large_sim` blended is 0.599 [EST] on this draw | Formula in the ROI section | [EST], using SIMULATED tokens and route shares |
-| Live schema-valid and category accuracy | Quality | 2026-10-17, one model, 87 messages: schema-valid 87 of 87; accuracy 82 of 87 and 83 of 87. The notes state that 83 of 87 is 95.4 percent | No launch target. The README says not to treat this sample as a launch metric | [docs/LIVE_RUN_TEMPLATE.md](LIVE_RUN_TEMPLATE.md) | MEASURED, small sample. UNVERIFIED as a rate you could staff to |
+| Live schema-valid and category accuracy | Quality | 2026-10-17, previous bilingual corpus, one model, 87 messages: schema-valid 87 of 87; accuracy 82 of 87 and 83 of 87. The notes state that 83 of 87 is 95.4 percent. Not re-run on the English-only rows | No launch target. The README says not to treat this sample as a launch metric | [docs/LIVE_RUN_TEMPLATE.md](LIVE_RUN_TEMPLATE.md) | MEASURED on the previous bilingual corpus, small sample. UNVERIFIED as a rate you could staff to |
 | Live attack block | Risk | 4 messages, inconclusive. Benign over-block not applicable (0 messages) | A count from 1 to 4 is not reported as a rate ([docs/METRICS.md](METRICS.md)) | Same template | MEASURED count, inconclusive rate |
 | Time to route | Experience | Not measured. The eval clock is frozen | Left blank | [docs/METRICS.md](METRICS.md) | Not measured |
 | Handle minutes | Productivity | 4 minutes [EST] | No measured target. The notes do not claim the person becomes faster, only that some tickets might leave the queue | Not measured in this repo | [EST] input |
@@ -126,7 +126,7 @@ Providers in the profile rows are simulated. Accuracy in those rows is not a mod
 | cascade | 1498.414 / 210 | 0.002128 | 2.128 | 0.8276 | 0.830 | met |
 | live, `grok-4.20-0309-non-reasoning` | not stored | not measured as a per-ticket [EST] row | not measured | not in this table | not in this table | not applicable |
 
-The live row is **MEASURED** as a run, not as a price card: schema-valid 87 of 87, accuracy 82 of 87 and 83 of 87, last run US$0.0391, repo estimate 0.0675 ignoring cached tokens. Attack block on that split is inconclusive (4 messages). Benign over-block is not applicable (0 messages). An earlier same-day check was 0 of 40 schema-valid because the prompt lacked the taxonomy. That prompt was corrected.
+The live row is **MEASURED** on the previous bilingual corpus, not re-run on the English-only rows: schema-valid 87 of 87, accuracy 82 of 87 and 83 of 87, last run US$0.0391, repo estimate 0.0675 ignoring cached tokens. Attack block on that split is inconclusive (4 messages). Benign over-block is not applicable (0 messages). An earlier same-day check was 0 of 40 schema-valid because the prompt lacked the taxonomy. That prompt was corrected.
 
 ### Monthly model cost and the `large_sim` blended illustration
 
@@ -190,7 +190,7 @@ The regression shows the gate can see a broken sanitizer: with the sanitizer and
 - 2026-10-22, Python 3.12.3, pytest 9.1.1, package 0.1.0: 77 passed, pytest-cov total coverage 91.38 percent. The table rounds the same total to 91 percent (2019 statements, 174 missed). The run printed a coverage warning that `triage_lab` was imported before measurement. The 91.38 percent figure is the total line anyway. Command and the warning text are in the README section "Proof".
 - 2026-10-17 eval gate: 0 invariant failures. Attack block 1.000 on 22 messages. Benign over-block 0.000 on 10 messages. I1–I6 on 34 messages (32 adversarial rows plus two probes).
 - 2026-10-17 forced regression: exit 1, with the pass/fail counts in the KPI table.
-- 2026-10-17 live check, `grok-4.20-0309-non-reasoning`, temperature 0, test split: schema-valid 87 of 87; accuracy 82 of 87 and 83 of 87; last run US$0.0391; repo estimate 0.0675 ignores cached tokens. The template calls this measured by independent verification. Attack messages: 4, inconclusive. Benign messages: 0, rate not applicable.
+- 2026-10-17 live check on the previous bilingual corpus, `grok-4.20-0309-non-reasoning`, temperature 0, test split: schema-valid 87 of 87; accuracy 82 of 87 and 83 of 87; last run US$0.0391; repo estimate 0.0675 ignores cached tokens. Not re-run on the English-only rows. The template calls this measured by independent verification. Attack messages: 4, inconclusive. Benign messages: 0, rate not applicable.
 - 2026-10-17 earlier live check: 0 of 40 schema-valid, prompt without the taxonomy, later corrected. Kept so the corrected run is not confused with it.
 - Demo stdout on 2026-10-22, `large_sim`, three lines: product question to `auto_reply_faq`, order status to `logistics_queue`, known-marker injection to `security_review`. Recorded in the README quickstart.
 

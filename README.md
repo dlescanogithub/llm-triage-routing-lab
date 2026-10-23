@@ -10,7 +10,7 @@ Walkthrough: [docs/HOW_IT_WORKS.md](docs/HOW_IT_WORKS.md). The unit-test line me
 
 Offline lab for one support inbox. The shop, Almacén Brújula, is fictional. Providers in CI are deterministic fakes. They exercise the harness, the invariants, and the controls. They do not measure a model.
 
-> **Honest limits.** Fake-versus-fake accuracy is **SIMULATED** by construction (`small_sim` flips about 1 id in 5, `large_sim` about 1 in 17). Do not quote it as model quality. A separate live check, **MEASURED** on 2026-10-17, is not part of CI: `grok-4.20-0309-non-reasoning`, temperature 0, test split, 87 messages, schema-valid 87 of 87, accuracy 82 of 87 and 83 of 87 on two runs. [docs/LIVE_RUN_TEMPLATE.md](docs/LIVE_RUN_TEMPLATE.md) labels that check as measured by independent verification. Attack block on that live split has 4 messages, which this lab treats as inconclusive. Benign over-block on that split has a zero denominator, so the rate is not applicable. Last run cost US$0.0391. The repo estimate 0.0675 ignores cached tokens. Token counts for those runs were not stored. Latency was not measured.
+> **Honest limits.** Fake-versus-fake accuracy is **SIMULATED** by construction (`small_sim` flips about 1 id in 5, `large_sim` about 1 in 17). Do not quote it as model quality. A separate live check, **MEASURED** on 2026-10-17 on the previous bilingual corpus and not re-run on the English-only rows, is not part of CI: `grok-4.20-0309-non-reasoning`, temperature 0, test split, 87 messages, schema-valid 87 of 87, accuracy 82 of 87 and 83 of 87 on two runs. [docs/LIVE_RUN_TEMPLATE.md](docs/LIVE_RUN_TEMPLATE.md) labels that check as measured by independent verification. Attack block on that live split has 4 messages, which this lab treats as inconclusive. Benign over-block on that split has a zero denominator, so the rate is not applicable. Last run cost US$0.0391. The repo estimate 0.0675 ignores cached tokens. Token counts for those runs were not stored. Latency was not measured.
 
 ## Problem and result
 
@@ -109,7 +109,7 @@ Not CI. One model, one prompt family, temperature 0, the test split. Recorded in
 | Date | What | Result |
 | --- | --- | --- |
 | 2026-10-17 | `grok-4.20-0309-non-reasoning`, 40 messages, prompt without the taxonomy | schema-valid 0 of 40, all `human_review`. Later corrected. Do not cite as the quality result. |
-| 2026-10-17 | Same model, temperature 0, test split, 87 messages, two runs | schema-valid 87 of 87. Accuracy 82 of 87 and 83 of 87. The repo states that 83 of 87 is 95.4 percent. |
+| 2026-10-17 | Same model, temperature 0, previous bilingual test split, 87 messages, two runs | schema-valid 87 of 87. Accuracy 82 of 87 and 83 of 87. The repo states that 83 of 87 is 95.4 percent. Not re-run on the English-only rows. |
 | 2026-10-17 | Last of those two runs | cost US$0.0391. Repo estimate 0.0675 ignores cached tokens. |
 | 2026-10-17 | Attack block and benign over-block on that live split | 4 attack messages, inconclusive. Benign over-block not applicable (0 messages). |
 
@@ -142,7 +142,7 @@ Almacén Brújula is the fictional shop already used in this repository. The row
 | Live adapter | Implemented, off unless `LIVE_LLM` is 1. The 2026-10-17 check above is **MEASURED** and is not in CI |
 | SFT export to a local JSONL | Implemented as a file export. No training run and no upload |
 | Fine-tuning, IMAP or webhook ingest, helpdesk connector, SSO or RBAC | Design only |
-| Languages other than Spanish and English, drift monitors, a PII redaction service | Design only |
+| Languages other than English, drift monitors, a PII redaction service | Design only |
 
 ### Governance checklist
 
@@ -159,7 +159,7 @@ Almacén Brújula is the fictional shop already used in this repository. The row
 | Secrets stay out of the tree | `src/triage_lab/secretscan.py`, `.env.example`. CI runs the scan |
 | No paid call in CI | The workflow does not set `LIVE_LLM`. Tests inject a transport. `urllib` is not used in tests |
 
-Not covered yet: SSO or RBAC, drift monitors on a live inbox, a PII redaction service, helpdesk webhooks, languages other than Spanish and English, and a real mailbox.
+Not covered yet: SSO or RBAC, drift monitors on a live inbox, a PII redaction service, helpdesk webhooks, languages other than English, and a real mailbox.
 
 ### Business strategy
 
@@ -175,7 +175,7 @@ Deployment conversation: start with the ten questions in [docs/DISCOVERY.md](doc
 
 - **MEASURED** gate, 2026-10-17: 0 invariant failures on the committed adversarial file; attack block 1.000 on 22 messages; benign over-block 0.000 on 10 messages.
 - **MEASURED** forced regression: exit 1 when the sanitizer and the allowlist are off.
-- **MEASURED** live sample, 2026-10-17, one model, 87 messages, two accuracy runs: schema-valid 87 of 87, accuracy 82 of 87 and 83 of 87. Not a launch metric. Attack count 4 is inconclusive.
+- **MEASURED** live sample, 2026-10-17, previous bilingual corpus, one model, 87 messages, two accuracy runs: schema-valid 87 of 87, accuracy 82 of 87 and 83 of 87. Not re-run on the English-only rows. Not a launch metric. Attack count 4 is inconclusive.
 - **SIMULATED** `large_sim` operating point on that eval: test human share 0.5977, test auto-error 0 of 35, dev constraint met at tau 0.90.
 - **[EST]** saving versus all-human at USD 1.00 per ticket, for that `large_sim` point: **0.401 USD per ticket**. At the published illustration of 10,000 tickets in a month, the operating difference is **4,010 USD** in that month. Build hours are not in the repo, so a project payback is not stated.
 
@@ -203,7 +203,7 @@ The robust claim is the control (no refund tool, known-marker containment, a kil
 
 Reporting path and the controls the code enforces: [SECURITY.md](SECURITY.md). Threat notes with owners: [docs/RISKS.md](docs/RISKS.md).
 
-The sanitizer only neutralizes the marker list in `src/triage_lab/sanitize.py`. A phrase that is not on that list is not flagged. Attack block 1.000 on 22 messages is on the committed file, which uses that list. A denominator of 0 is not applicable, not 0. A count from 1 to 4 is labelled inconclusive. The source string for that label is Spanish; this README uses the English word.
+The sanitizer only neutralizes the marker list in `src/triage_lab/sanitize.py`. A phrase that is not on that list is not flagged. Attack block 1.000 on 22 messages is on the committed file, which uses that list. A denominator of 0 is not applicable, not 0. A count from 1 to 4 is labelled `not conclusive`.
 
 Labels were written with the text. There is no agreement study. See [data/LABELS.md](data/LABELS.md).
 

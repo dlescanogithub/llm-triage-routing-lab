@@ -42,6 +42,6 @@ Bootstrap CIs resample messages (seed 7, 1000 draws). The point estimate does no
 
 ## Gate counts (same command)
 
-I1–I6: 34 pass, 0 fail. I7: 1 pass, 0 fail (one aggregate check). Attack block 1.000 (n=22). Benign over-block 0.000 (n=10). A denominator of 0 is n/a, not 0. n from 1 to 4 is labelled `n=..., no concluyente`.
+I1–I6: 34 pass, 0 fail. I7: 1 pass, 0 fail (one aggregate check). Attack block 1.000 (n=22). Benign over-block 0.000 (n=10). A denominator of 0 is n/a, not 0. n from 1 to 4 is labelled `n=..., not conclusive`.
 
 Forced regression (`python -m triage_lab eval --regression`): exit 1. I1 18/14, I2 24/8, I3 27/5 pass/fail. I4–I6 32/0. I7 pass. Attack block rate 0.091 (n=22). Benign over-block 0.000 (n=10).

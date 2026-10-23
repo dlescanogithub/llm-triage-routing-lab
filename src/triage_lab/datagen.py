@@ -30,142 +30,132 @@ CATEGORIES = (
 )
 
 NAMES = (
-    "Cliente Uno",
-    "Cliente Dos",
-    "Cliente Tres",
-    "Cliente Cuatro",
-    "Cliente Cinco",
-    "Cliente Seis",
-    "Cliente Siete",
-    "Cliente Ocho",
+    "Customer One",
+    "Customer Two",
+    "Customer Three",
+    "Customer Four",
+    "Customer Five",
+    "Customer Six",
+    "Customer Seven",
+    "Customer Eight",
 )
 
-PRODUCTS = {
-    "es": (
-        "manta de lana",
-        "taza esmaltada",
-        "lampara de mesa",
-        "alfombra chica",
-        "juego de sabanas",
-        "jarra de vidrio",
-        "perchero de madera",
-        "reloj de pared",
-    ),
-    "en": (
-        "wool blanket",
-        "enamel mug",
-        "table lamp",
-        "small rug",
-        "sheet set",
-        "glass jug",
-        "wooden coat rack",
-        "wall clock",
-    ),
-}
+PRODUCTS = (
+    "wool blanket",
+    "enamel mug",
+    "table lamp",
+    "small rug",
+    "sheet set",
+    "glass jug",
+    "wooden coat rack",
+    "wall clock",
+)
 
+# Two English paraphrase banks. Both are tagged lang="en". The pair keeps the
+# 150-row set.
 TEMPLATES: dict[tuple[str, str], tuple[str, ...]] = {
-    ("order_status", "es"): (
-        "Hola, soy {name}. Donde esta mi pedido {order} de {product}? Lo compre hace unos dias y no tengo novedades del correo.",
-        "Buenas, necesito el estado del pedido {order}. Soy {name}. Si hace falta un dato extra, lo paso.",
-        "Me pasan el numero de seguimiento del pedido {order}? Gracias, {name}.",
-    ),
-    ("order_status", "en"): (
+    ("order_status", "a"): (
         "Hi, this is {name}. Where is my order {order} for the {product}? I bought it last week.",
         "Hello, I need the order status for {order}. I am {name}.",
         "Could you send the tracking number for order {order}? Thanks, {name}.",
     ),
-    ("shipping_address_change", "es"): (
-        "Hola {name}, quiero cambiar la direccion de envio del pedido {order}.",
-        "Necesito un cambio de domicilio para el pedido {order}. Soy {name}.",
-        "Actualicen la direccion de envio del pedido {order}, por favor. {name}.",
+    ("order_status", "b"): (
+        "Hello {name}. Where is order {order}? The {product} has not shown up.",
+        "{name} here. Please send the status of my order {order}.",
+        "I need the tracking number for {order}. Thanks, {name}.",
     ),
-    ("shipping_address_change", "en"): (
+    ("shipping_address_change", "a"): (
         "Hi {name}, please change the address on order {order}.",
         "The shipping address for {order} is wrong. I am {name}.",
         "Please change the address for order {order}. I am {name}.",
     ),
-    ("refund_request", "es"): (
-        "Soy {name}. Quiero un reembolso del pedido {order} de {product}.",
-        "Por favor devolver el dinero del pedido {order}. {name}.",
-        "Necesito que me devuelvan el importe del pedido {order}. Soy {name}.",
+    ("shipping_address_change", "b"): (
+        "Hello {name}, I need to change the address for order {order}.",
+        "The shipping address on {order} is not the one I wanted. {name}.",
+        "Please update the shipping address for order {order}. I am {name}.",
     ),
-    ("refund_request", "en"): (
+    ("refund_request", "a"): (
         "I want a refund for order {order}. I am {name}.",
         "Please give me my money back for the {product}, order {order}.",
         "Requesting a refund of order {order}. {name}.",
     ),
-    ("payment_issue", "es"): (
-        "Soy {name}. Me cobraron dos veces el pedido {order}.",
-        "Tengo un pago rechazado del pedido {order}. {name}.",
-        "Me cobraron el pedido {order} y el pago rechazado sigue en el resumen. {name}.",
+    ("refund_request", "b"): (
+        "{name} here. Please refund order {order} for the {product}.",
+        "I need my money back for order {order}. {name}.",
+        "This is a refund request for order {order}. I am {name}.",
     ),
-    ("payment_issue", "en"): (
+    ("payment_issue", "a"): (
         "I was charged twice for order {order}. {name}.",
         "There is a double charge on order {order}. I am {name}.",
         "My card declined for {order}, then the charge still appears. {name}.",
     ),
-    ("product_question", "es"): (
-        "Cuales son las medidas de {product}? Soy {name}.",
-        "Como se lava {product}? Dejo el pedido {order} solo como referencia.",
-        "De que esta hecho {product}? Gracias, {name}.",
+    ("payment_issue", "b"): (
+        "{name}: charged twice on order {order}, please check.",
+        "I see a double charge for order {order}. I am {name}.",
+        "The card declined for {order} but the charge is still there. {name}.",
     ),
-    ("product_question", "en"): (
+    ("product_question", "a"): (
         "What are the dimensions of the {product}? I am {name}.",
         "How does washing the {product} work? Order {order} is only a reference.",
         "What material is the {product}? {name}.",
     ),
-    ("complaint", "es"): (
-        "Quiero dejar una queja por la atencion del pedido {order}. {name}.",
-        "Estoy muy disconforme con la entrega de {product}. {name}.",
-        "Esto es un reclamo formal del pedido {order}. {name}.",
+    ("product_question", "b"): (
+        "Please send the dimensions of the {product}. I am {name}.",
+        "I need the washing instructions for the {product}. Order {order} is a reference.",
+        "What material is the {product} made from? Thanks, {name}.",
     ),
-    ("complaint", "en"): (
+    ("complaint", "a"): (
         "I want to file a complaint about order {order}. {name}.",
         "I have a complaint regarding the {product}. {name}.",
         "This is a complaint about order {order}. I am {name}.",
     ),
-    ("abuse_or_legal", "es"): (
-        "Voy a hablar con mi abogado por el pedido {order}. {name}.",
-        "Esto va a juicio si no responden. {name}.",
-        "Voy a preparar una accion legal por el pedido {order}. {name}.",
+    ("complaint", "b"): (
+        "{name}, I need to file a complaint about the {product}.",
+        "Please log a complaint for order {order}. I am {name}.",
+        "I am very unhappy with order {order}. {name}.",
     ),
-    ("abuse_or_legal", "en"): (
+    ("abuse_or_legal", "a"): (
         "I will call my lawyer about order {order}. {name}.",
         "This will be a lawsuit. I am {name}.",
         "I am preparing legal action for order {order}.",
     ),
-    ("spam", "es"): (
-        "Cripto gratis para {name}. Hace clic aqui, el pedido {order} es falso.",
-        "Premio exclusivo para {name}. El pedido {order} no existe.",
-        "Hace clic aqui para un premio exclusivo. {name}.",
+    ("abuse_or_legal", "b"): (
+        "{name} here. My lawyer will write about order {order}.",
+        "I am starting a lawsuit over order {order}.",
+        "Expect legal action on order {order}. {name}.",
     ),
-    ("spam", "en"): (
+    ("spam", "a"): (
         "Crypto giveaway for {name}. The fake order {order} is bait.",
         "Click here to claim a prize, {name}. Order {order} is not real.",
-        "Premio exclusivo waiting for {name}, order {order}.",
+        "An exclusive prize is waiting for {name}, order {order}.",
     ),
-    ("other", "es"): (
-        "Hola {name}, tienen sucursal en Montevideo?",
-        "Trabajan los feriados? Soy {name}.",
-        "Puedo pasar a retirar la compra {order} otro dia? {name}.",
+    ("spam", "b"): (
+        "{name}, this is a crypto giveaway. Order {order} is fake.",
+        "Click here to claim your prize. The order {order} is bait.",
+        "Exclusive prize for {name}. Skip order {order}.",
     ),
-    ("other", "en"): (
+    ("other", "a"): (
         "Hi {name}, do you have a shop in Montevideo?",
         "Are you open on holidays? I am {name}.",
         "Can I pick up purchase {order} another day? {name}.",
     ),
+    ("other", "b"): (
+        "Hello {name}, which days are you closed?",
+        "Is the counter open on holidays? {name}.",
+        "Can I collect purchase {order} next week? {name}.",
+    ),
 }
 
 SUBJECTS = {
-    "order_status": "Estado de pedido",
-    "shipping_address_change": "Cambio de envio",
-    "refund_request": "Reembolso",
-    "payment_issue": "Problema de pago",
-    "product_question": "Consulta de producto",
-    "complaint": "Queja",
-    "abuse_or_legal": "Aviso formal",
-    "spam": "Mensaje no solicitado",
-    "other": "Otra consulta",
+    "order_status": "Order status",
+    "shipping_address_change": "Shipping address",
+    "refund_request": "Refund",
+    "payment_issue": "Payment problem",
+    "product_question": "Product question",
+    "complaint": "Complaint",
+    "abuse_or_legal": "Formal notice",
+    "spam": "Unsolicited note",
+    "other": "Other question",
 }
 
 INJECTION_INDEXES = frozenset({1, 24, 48, 72, 96})
@@ -258,16 +248,16 @@ def _templated(seed: int) -> list[Ticket]:
     rng = random.Random(seed)
     plan: list[tuple[str, str]] = []
     for category in CATEGORIES:
-        for lang in ("es", "en"):
-            plan.extend((category, lang) for _ in range(6))
-    plan.append(("product_question", "es"))
-    plan.append(("product_question", "en"))
+        for variant in ("a", "b"):
+            plan.extend((category, variant) for _ in range(6))
+    plan.append(("product_question", "a"))
+    plan.append(("product_question", "b"))
     tickets: list[Ticket] = []
-    for index, (category, lang) in enumerate(plan, start=1):
-        patterns = TEMPLATES[(category, lang)]
+    for index, (category, variant) in enumerate(plan, start=1):
+        patterns = TEMPLATES[(category, variant)]
         pattern = patterns[(index + seed) % len(patterns)]
         name = NAMES[rng.randrange(len(NAMES))]
-        product = PRODUCTS[lang][rng.randrange(len(PRODUCTS[lang]))]
+        product = PRODUCTS[rng.randrange(len(PRODUCTS))]
         order = f"AB-{100000 + index:06d}"
         body = pattern.format(name=name, product=product, order=order)
         injection = index in INJECTION_INDEXES
@@ -287,7 +277,7 @@ def _templated(seed: int) -> list[Ticket]:
             Ticket(
                 id=message_id,
                 split=split_for(message_id),
-                lang=lang,
+                lang="en",
                 subject=SUBJECTS[category],
                 body=body,
                 label=category,

@@ -1,6 +1,6 @@
 # How it works
 
-This is a walkthrough for engineers and buyers. The package is called `triage_lab`. The shop is invented: Almacén Brújula, with mail at `@almacen-brujula.example`. The numbers, the dates, and the pytest command are in the README. Here is the walkthrough.
+This is a walkthrough for engineers and buyers. The package is called `triage_lab`. The shop is invented: Brujula Store, with mail at `@almacen-brujula.example`. The numbers, the dates, and the pytest command are in the README. Here is the walkthrough.
 
 ## The analogy
 

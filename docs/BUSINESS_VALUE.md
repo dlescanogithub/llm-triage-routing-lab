@@ -2,7 +2,7 @@
 
 > **Notice**
 >
-> - The shop in this repository, Almacén Brújula, is fictional. It is not an employer and not a client. Order numbers and mailboxes in the data files are synthetic.
+> - The shop in this repository, Brujula Store, is fictional. It is not an employer and not a client. Order numbers and mailboxes in the data files are synthetic.
 > - This plan reuses [docs/BUSINESS_CASE.md](BUSINESS_CASE.md), [docs/COST.md](COST.md), [docs/METRICS.md](METRICS.md), and [docs/SCOPE.md](SCOPE.md). It does not add money figures. Where a cell would need a new assumption, the cell says the repo does not record it.
 > - Tags used here:
 >   - **MEASURED**: a command in this repo, or a live check recorded in [docs/LIVE_RUN_TEMPLATE.md](LIVE_RUN_TEMPLATE.md), with the date.

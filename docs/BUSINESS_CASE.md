@@ -1,6 +1,6 @@
 # Business case
 
-Fictional shop: Almacén Brújula. No fees were charged and none are quoted as real.
+Fictional shop: Brujula Store. No fees were charged and none are quoted as real.
 
 ## Baseline
 

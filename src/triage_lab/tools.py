@@ -10,7 +10,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 FAQ_REPLY = (
-    "Thanks for writing to Almacén Brújula. "
+    "Thanks for writing to Brujula Store. "
     "Sizes and care are on the product page. "
     "If a detail is missing, a person on the team fills it in."
 )

@@ -2,7 +2,7 @@
 
 ## 0.1.1 - 2026-10-22
 
-- The repository is English. Shop tickets, templates, the FAQ reply, sanitizer markers, the keyword lexicon, fixtures, and docs are English. The small-sample rate label is `not conclusive`.
+- The repository is English. Shop tickets, templates, the FAQ reply, sanitizer markers, the keyword lexicon, fixtures, and docs are English. The small-sample rate label is `not conclusive`. The fictional shop name is `Brujula Store`.
 - Live accuracy and cost from 2026-10-17 stay as measured on the previous bilingual corpus. They were not re-run. Simulated profile figures were remeasured on the English corpus on 2026-10-23 (`python -m triage_lab eval`, commit `8fa0e2217fa3f00c5d4f375b281e300b0c1b1ac5`). `large_sim` test accuracy stays 0.9655. Test human share is 0.1724 at tau 0.80. Blended cost is 0.174 USD per ticket [EST]. Saving versus all-human is 0.826 USD per ticket [EST].
 - Security reports go through GitHub private vulnerability reporting: open the Security tab and choose "Report a vulnerability".
 - `docs/HOW_IT_WORKS.md` is a walkthrough for engineers and buyers. Interview-script framing is removed from that page and from the README docs index.
@@ -15,4 +15,4 @@
 
 ## 0.1.0
 
-- Synthetic triage lab for Almacén Brújula: taxonomy, golden set, simulated profiles, invariant gate, shadow mode, and an optional live adapter that is off by default.
+- Synthetic triage lab for Brujula Store: taxonomy, golden set, simulated profiles, invariant gate, shadow mode, and an optional live adapter that is off by default.

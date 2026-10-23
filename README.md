@@ -8,7 +8,7 @@ On the committed synthetic files, the control gate records zero invariant failur
 One command, no key and no network: `python -m triage_lab demo`.
 Walkthrough: [docs/HOW_IT_WORKS.md](docs/HOW_IT_WORKS.md). The unit-test line measured on 2026-10-23 is in [Proof](#proof).
 
-Offline lab for one support inbox. The shop, Almacén Brújula, is fictional. Providers in CI are deterministic fakes. They exercise the harness, the invariants, and the controls. They do not measure a model.
+Offline lab for one support inbox. The shop, Brujula Store, is fictional. Providers in CI are deterministic fakes. They exercise the harness, the invariants, and the controls. They do not measure a model.
 
 > **Honest limits.** Fake-versus-fake accuracy is **SIMULATED** by construction (`small_sim` flips about 1 id in 5, `large_sim` about 1 in 17). Do not quote it as model quality. A separate live check, **MEASURED** on 2026-10-17 on the previous bilingual corpus and not re-run on the English-only rows, is not part of CI: `grok-4.20-0309-non-reasoning`, temperature 0, test split, 87 messages, schema-valid 87 of 87, accuracy 82 of 87 and 83 of 87 on two runs. [docs/LIVE_RUN_TEMPLATE.md](docs/LIVE_RUN_TEMPLATE.md) labels that check as measured by independent verification. Attack block on that live split has 4 messages, which this lab treats as inconclusive. Benign over-block on that split has a zero denominator, so the rate is not applicable. Last run cost US$0.0391. The repo estimate 0.0675 ignores cached tokens. Token counts for those runs were not stored. Latency was not measured.
 
@@ -119,11 +119,11 @@ A comparative live check that used one price for every model recorded **0.0044 U
 
 ### Client-style use cases (fictional, inspired by a pattern, no real client)
 
-Almacén Brújula is the fictional shop already used in this repository. The rows are patterns, not an engagement.
+Brujula Store is the fictional shop already used in this repository. The rows are patterns, not an engagement.
 
 | Use case | Status | Problem | Who approves | Gated effects | How this repo handles it |
 | --- | --- | --- | --- | --- | --- |
-| Support-inbox triage for Almacén Brújula | Implemented as a synthetic lab | Route mail without auto-refunds or an injection that becomes an auto-reply | Taxonomy owner; a named person approves tau | No refund tool; injection goes to `security_review` | Golden set, invariant gate, shadow mode, kill switch |
+| Support-inbox triage for Brujula Store | Implemented as a synthetic lab | Route mail without auto-refunds or an injection that becomes an auto-reply | Taxonomy owner; a named person approves tau | No refund tool; injection goes to `security_review` | Golden set, invariant gate, shadow mode, kill switch |
 | Internal IT helpdesk routing | Design only | Same pattern, different taxonomy | Catalog owner | Read-only lookups | Not built |
 | Regulated-sector intake | Design only | Stricter fallback and audit | Compliance approves tau and the log schema | More `human_review`; no auto-reply | Described in [docs/SCOPE.md](docs/SCOPE.md) only |
 
@@ -169,7 +169,7 @@ Deployment conversation: start with the ten questions in [docs/DISCOVERY.md](doc
 
 ## Business value
 
-> **Same fictional shop.** Almacén Brújula is invented for this lab. It is not an employer or a client. Money figures below are the repo's own **[EST]** placeholders, not a new set of assumptions. Full plan: [docs/BUSINESS_VALUE.md](docs/BUSINESS_VALUE.md).
+> **Same fictional shop.** Brujula Store is invented for this lab. It is not an employer or a client. Money figures below are the repo's own **[EST]** placeholders, not a new set of assumptions. Full plan: [docs/BUSINESS_VALUE.md](docs/BUSINESS_VALUE.md).
 
 **What the repo can point at:**
 

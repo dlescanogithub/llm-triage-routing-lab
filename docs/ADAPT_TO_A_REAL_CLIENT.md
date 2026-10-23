@@ -2,7 +2,7 @@
 
 Keep the gate. Replace the fiction.
 
-1. New taxonomy YAML, new owner, new version. Do not reuse Almacén Brújula categories if the inbox is different.
+1. New taxonomy YAML, new owner, new version. Do not reuse Brujula Store categories if the inbox is different.
 2. New golden set, labeled by people, with a written guide and a second pass on a sample. This repo's labels are template plus authored.
 3. Shadow an export. No tools that touch customers. Read `docs/RUNBOOK.md` before the first file.
 4. Agree the auto-error budget and who changes tau (`docs/DISCOVERY.md`).

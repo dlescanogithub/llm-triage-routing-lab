@@ -286,7 +286,7 @@ Also: `python -m triage_lab data generate --seed 7` and `python -m triage_lab da
 
 | Doc | What it is for |
 | --- | --- |
-| [docs/HOW_IT_WORKS.md](docs/HOW_IT_WORKS.md) | Interview walkthrough |
+| [docs/HOW_IT_WORKS.md](docs/HOW_IT_WORKS.md) | Walkthrough for engineers and buyers |
 | [docs/BUSINESS_CASE.md](docs/BUSINESS_CASE.md) | Saving formula. Money figures are [EST] |
 | [docs/BUSINESS_VALUE.md](docs/BUSINESS_VALUE.md) | Value plan for the fictional shop. No new money figures |
 | [docs/DISCOVERY.md](docs/DISCOVERY.md) | Ten questions and what each answer changes |

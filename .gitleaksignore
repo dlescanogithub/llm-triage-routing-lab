@@ -1,0 +1,5 @@
+# sha256 digest of secretscan.py in docs/PROVENANCE.md. Not a credential.
+# Fingerprints from gitleaks 8.28.0, rule generic-api-key, that line only.
+docs/PROVENANCE.md:generic-api-key:11
+81b3aabcdb7621b2a14d6b96b37ff2a7d0a90a75:docs/PROVENANCE.md:generic-api-key:11
+1b9f8683471004475da8ebaededffa4306f76700:docs/PROVENANCE.md:generic-api-key:11

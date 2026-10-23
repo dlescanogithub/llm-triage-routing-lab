@@ -8,8 +8,8 @@
     "n_benign": 10
   },
   "command": "python -m triage_lab eval",
-  "generated_on": "2026-10-17",
-  "git_commit": "81e3aac00afc5f3662fb20af60aa7642ba198a99",
+  "generated_on": "2026-10-23",
+  "git_commit": "8fa0e2217fa3f00c5d4f375b281e300b0c1b1ac5",
   "invariants": {
     "I1": {
       "fail": 0,
@@ -45,23 +45,23 @@
       "a": "large_sim",
       "b": "small_sim",
       "b_a_wrong_b_right": 2,
-      "c_a_right_b_wrong": 30,
+      "c_a_right_b_wrong": 29,
       "n": 87,
-      "n_discordant": 32,
+      "n_discordant": 31,
       "note": "exact McNemar on paired test messages; simulated profiles, not models",
-      "p": 2.4633482098579407e-07,
+      "p": 4.628673195838928e-07,
       "p_display": "<0.0001"
     },
     {
       "a": "large_sim",
       "b": "rules_baseline",
       "b_a_wrong_b_right": 2,
-      "c_a_right_b_wrong": 19,
+      "c_a_right_b_wrong": 18,
       "n": 87,
-      "n_discordant": 21,
+      "n_discordant": 20,
       "note": "exact McNemar on paired test messages; simulated profiles, not models",
-      "p": 0.00022125244140625,
-      "p_display": "0.0002"
+      "p": 0.0004024505615234375,
+      "p_display": "0.0004"
     },
     {
       "a": "small_sim",
@@ -85,7 +85,7 @@
         "n_boot": 1000.0,
         "point": 0.9655172413793104
       },
-      "avg_tokens_in": 1498.4137931034484,
+      "avg_tokens_in": 1497.4022988505747,
       "avg_tokens_out": 210.0,
       "confusion": {
         "abuse_or_legal": {
@@ -192,12 +192,12 @@
       "dev_constraint_met": true,
       "dev_routing": {
         "auto_error": 0.0,
-        "coverage": 0.1111111111111111,
-        "human_share": 0.8888888888888888,
-        "n_auto": 7,
+        "coverage": 0.09523809523809523,
+        "human_share": 0.9047619047619048,
+        "n_auto": 6,
         "n_auto_error": 0,
-        "n_human": 56,
-        "tau": 0.95
+        "n_human": 57,
+        "tau": 0.99
       },
       "ece": {
         "bins": [
@@ -228,11 +228,11 @@
           {
             "accuracy": 1.0,
             "bin": 4,
-            "confidence": 0.8503947368421052,
+            "confidence": 0.8452631578947368,
             "count": 76
           }
         ],
-        "ece": 0.20367816091954027
+        "ece": 0.20816091954022992
       },
       "macro_f1": 0.9667107492769689,
       "macro_f1_ci95": {
@@ -319,12 +319,8 @@
         },
         "lang": {
           "en": {
-            "accuracy": 0.9714285714285714,
-            "n": 35
-          },
-          "es": {
-            "accuracy": 0.9615384615384616,
-            "n": 52
+            "accuracy": 0.9655172413793104,
+            "n": 87
           }
         },
         "length": {
@@ -334,15 +330,15 @@
           }
         }
       },
-      "tau": 0.95,
+      "tau": 0.99,
       "test_routing": {
         "auto_error": 0.0,
-        "coverage": 0.1724137931034483,
-        "human_share": 0.8275862068965517,
-        "n_auto": 15,
+        "coverage": 0.16091954022988506,
+        "human_share": 0.8390804597701149,
+        "n_auto": 14,
         "n_auto_error": 0,
-        "n_human": 72,
-        "tau": 0.95
+        "n_human": 73,
+        "tau": 0.99
       },
       "token_note": "simulated char/4 heuristic plus profile overhead, not a tokenizer"
     },
@@ -355,7 +351,7 @@
         "n_boot": 1000.0,
         "point": 0.9655172413793104
       },
-      "avg_tokens_in": 989.2068965517242,
+      "avg_tokens_in": 988.7011494252873,
       "avg_tokens_out": 130.0,
       "confusion": {
         "abuse_or_legal": {
@@ -462,12 +458,12 @@
       "dev_constraint_met": true,
       "dev_routing": {
         "auto_error": 0.0,
-        "coverage": 0.23809523809523808,
-        "human_share": 0.7619047619047619,
-        "n_auto": 15,
+        "coverage": 0.7619047619047619,
+        "human_share": 0.23809523809523808,
+        "n_auto": 48,
         "n_auto_error": 0,
-        "n_human": 48,
-        "tau": 0.9
+        "n_human": 15,
+        "tau": 0.8
       },
       "ece": {
         "bins": [
@@ -498,11 +494,11 @@
           {
             "accuracy": 1.0,
             "bin": 4,
-            "confidence": 0.8503947368421052,
+            "confidence": 0.8452631578947368,
             "count": 76
           }
         ],
-        "ece": 0.20367816091954027
+        "ece": 0.20816091954022992
       },
       "macro_f1": 0.9667107492769689,
       "macro_f1_ci95": {
@@ -589,12 +585,8 @@
         },
         "lang": {
           "en": {
-            "accuracy": 0.9714285714285714,
-            "n": 35
-          },
-          "es": {
-            "accuracy": 0.9615384615384616,
-            "n": 52
+            "accuracy": 0.9655172413793104,
+            "n": 87
           }
         },
         "length": {
@@ -604,28 +596,28 @@
           }
         }
       },
-      "tau": 0.9,
+      "tau": 0.8,
       "test_routing": {
         "auto_error": 0.0,
-        "coverage": 0.40229885057471265,
-        "human_share": 0.5977011494252874,
-        "n_auto": 35,
+        "coverage": 0.8275862068965517,
+        "human_share": 0.1724137931034483,
+        "n_auto": 72,
         "n_auto_error": 0,
-        "n_human": 52,
-        "tau": 0.9
+        "n_human": 15,
+        "tau": 0.8
       },
       "token_note": "simulated char/4 heuristic plus profile overhead, not a tokenizer"
     },
     "rules_baseline": {
-      "accuracy": 0.7701149425287356,
+      "accuracy": 0.7816091954022989,
       "accuracy_ci95": {
-        "high": 0.8620689655172413,
-        "low": 0.6781609195402298,
+        "high": 0.8735632183908046,
+        "low": 0.6896551724137931,
         "n": 87.0,
         "n_boot": 1000.0,
-        "point": 0.7701149425287356
+        "point": 0.7816091954022989
       },
-      "avg_tokens_in": 357.2068965517241,
+      "avg_tokens_in": 356.7011494252874,
       "avg_tokens_out": 36.0,
       "confusion": {
         "abuse_or_legal": {
@@ -653,8 +645,8 @@
         "order_status": {
           "abuse_or_legal": 0,
           "complaint": 0,
-          "order_status": 10,
-          "other": 1,
+          "order_status": 11,
+          "other": 0,
           "payment_issue": 0,
           "product_question": 0,
           "refund_request": 1,
@@ -748,10 +740,10 @@
             "count": 0
           },
           {
-            "accuracy": 0.375,
+            "accuracy": 0.391304347826087,
             "bin": 1,
             "confidence": 0.33,
-            "count": 24
+            "count": 23
           },
           {
             "accuracy": 0.0,
@@ -760,27 +752,27 @@
             "count": 0
           },
           {
-            "accuracy": 0.9193548387096774,
+            "accuracy": 0.921875,
             "bin": 3,
-            "confidence": 0.6783870967741936,
-            "count": 62
+            "confidence": 0.6721875,
+            "count": 64
           },
           {
-            "accuracy": 1.0,
+            "accuracy": 0.0,
             "bin": 4,
-            "confidence": 0.9299999999999999,
-            "count": 1
+            "confidence": 0.0,
+            "count": 0
           }
         ],
-        "ece": 0.18494252873563213
+        "ece": 0.19988505747126434
       },
-      "macro_f1": 0.7987480360881896,
+      "macro_f1": 0.8058754698460581,
       "macro_f1_ci95": {
-        "high": 0.8681414446120328,
-        "low": 0.6985054474618042,
+        "high": 0.8759174467507802,
+        "low": 0.7091127540043949,
         "n": 87.0,
         "n_boot": 1000.0,
-        "point": 0.7987480360881896
+        "point": 0.8058754698460581
       },
       "n_dev": 63,
       "n_test": 87,
@@ -798,14 +790,14 @@
           "support": 11
         },
         "order_status": {
-          "f1": 0.8695652173913043,
-          "precision": 0.9090909090909091,
-          "recall": 0.8333333333333334,
+          "f1": 0.9166666666666666,
+          "precision": 0.9166666666666666,
+          "recall": 0.9166666666666666,
           "support": 12
         },
         "other": {
-          "f1": 0.5454545454545454,
-          "precision": 0.375,
+          "f1": 0.5625,
+          "precision": 0.391304347826087,
           "recall": 1.0,
           "support": 9
         },
@@ -849,7 +841,7 @@
             "n": 55
           },
           "hard": {
-            "accuracy": 0.16666666666666666,
+            "accuracy": 0.20833333333333334,
             "n": 24
           },
           "medium": {
@@ -859,17 +851,13 @@
         },
         "lang": {
           "en": {
-            "accuracy": 0.8,
-            "n": 35
-          },
-          "es": {
-            "accuracy": 0.75,
-            "n": 52
+            "accuracy": 0.7816091954022989,
+            "n": 87
           }
         },
         "length": {
           "len:short": {
-            "accuracy": 0.7701149425287356,
+            "accuracy": 0.7816091954022989,
             "n": 87
           }
         }
@@ -887,15 +875,15 @@
       "token_note": "simulated char/4 heuristic plus profile overhead, not a tokenizer"
     },
     "small_sim": {
-      "accuracy": 0.6436781609195402,
+      "accuracy": 0.6551724137931034,
       "accuracy_ci95": {
-        "high": 0.7471264367816092,
-        "low": 0.5402298850574713,
+        "high": 0.7586206896551724,
+        "low": 0.5517241379310345,
         "n": 87.0,
         "n_boot": 1000.0,
-        "point": 0.6436781609195402
+        "point": 0.6551724137931034
       },
-      "avg_tokens_in": 509.2068965517241,
+      "avg_tokens_in": 508.7011494252874,
       "avg_tokens_out": 80.0,
       "confusion": {
         "abuse_or_legal": {
@@ -923,8 +911,8 @@
         "order_status": {
           "abuse_or_legal": 0,
           "complaint": 0,
-          "order_status": 8,
-          "other": 1,
+          "order_status": 9,
+          "other": 0,
           "payment_issue": 2,
           "product_question": 0,
           "refund_request": 1,
@@ -1036,21 +1024,21 @@
             "count": 37
           },
           {
-            "accuracy": 0.6744186046511628,
+            "accuracy": 0.6976744186046512,
             "bin": 4,
             "confidence": 0.8806465116279071,
             "count": 43
           }
         ],
-        "ece": 0.17425517241379312
+        "ece": 0.1627609195402299
       },
-      "macro_f1": 0.6646107775140033,
+      "macro_f1": 0.6726708074534161,
       "macro_f1_ci95": {
-        "high": 0.7515440348526901,
-        "low": 0.5522678475577026,
+        "high": 0.7605185630431072,
+        "low": 0.5634776141312089,
         "n": 87.0,
         "n_boot": 1000.0,
-        "point": 0.6646107775140033
+        "point": 0.6726708074534161
       },
       "n_dev": 63,
       "n_test": 87,
@@ -1068,14 +1056,14 @@
           "support": 11
         },
         "order_status": {
-          "f1": 0.7272727272727272,
-          "precision": 0.8,
-          "recall": 0.6666666666666666,
+          "f1": 0.7826086956521738,
+          "precision": 0.8181818181818182,
+          "recall": 0.75,
           "support": 12
         },
         "other": {
-          "f1": 0.5161290322580644,
-          "precision": 0.36363636363636365,
+          "f1": 0.5333333333333333,
+          "precision": 0.38095238095238093,
           "recall": 0.8888888888888888,
           "support": 9
         },
@@ -1119,7 +1107,7 @@
             "n": 55
           },
           "hard": {
-            "accuracy": 0.16666666666666666,
+            "accuracy": 0.20833333333333334,
             "n": 24
           },
           "medium": {
@@ -1129,17 +1117,13 @@
         },
         "lang": {
           "en": {
-            "accuracy": 0.6857142857142857,
-            "n": 35
-          },
-          "es": {
-            "accuracy": 0.6153846153846154,
-            "n": 52
+            "accuracy": 0.6551724137931034,
+            "n": 87
           }
         },
         "length": {
           "len:short": {
-            "accuracy": 0.6436781609195402,
+            "accuracy": 0.6551724137931034,
             "n": 87
           }
         }
@@ -1159,6 +1143,6 @@
   },
   "providers_are": "simulated profiles; accuracy is not a real-model measurement",
   "real_providers": "none yet",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "violation_count": 0
 }

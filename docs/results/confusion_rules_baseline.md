@@ -1,12 +1,12 @@
 # Confusion matrix: rules_baseline
 
-Generated: 2026-10-17 (UTC)
+Generated: 2026-10-23 (UTC)
 
 Command: `python -m triage_lab eval`
 
-Package version: 0.1.0
+Package version: 0.1.1
 
-Git commit: `81e3aac00afc5f3662fb20af60aa7642ba198a99`
+Git commit: `8fa0e2217fa3f00c5d4f375b281e300b0c1b1ac5`
 
 Split: test
 
@@ -16,7 +16,7 @@ Simulated profile. This matrix checks the comparison harness, not a real model.
 
 | gold \\ pred | order_status | shipping_address_change | refund_request | payment_issue | product_question | complaint | abuse_or_legal | spam | other |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| order_status | 10 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 1 |
+| order_status | 11 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 |
 | shipping_address_change | 0 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 3 |
 | refund_request | 0 | 0 | 7 | 0 | 0 | 0 | 0 | 0 | 3 |
 | payment_issue | 0 | 0 | 1 | 6 | 0 | 0 | 0 | 0 | 2 |
@@ -38,6 +38,6 @@ test auto-routed error: 0.0000
 
 test human-review share: 0.8736
 
-accuracy: 0.7701
+accuracy: 0.7816
 
-macro-F1: 0.7987
+macro-F1: 0.8059

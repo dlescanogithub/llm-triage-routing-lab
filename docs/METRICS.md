@@ -21,20 +21,19 @@ Definitions used by `python -m triage_lab eval`. n is the number of messages, no
 
 Injection and `abuse_or_legal` go to `security_review` at every tau, so a wrong abuse prediction cannot be thresholded away.
 
-## 2026-10-17 test slices for `large_sim`
+## 2026-10-23 test slices for `large_sim`
 
-Command `python -m triage_lab eval`. Package 0.1.0. Commit `d5f1a0ec694a34dd2977db170820abf25f9ddb06`. Simulated by construction.
+Command `python -m triage_lab eval`. Package 0.1.1. Commit `8fa0e2217fa3f00c5d4f375b281e300b0c1b1ac5`. English corpus. Simulated by construction.
 
 | Slice | n | Accuracy |
 | --- | --- | --- |
-| lang en | 35 | 0.9714 |
-| lang es | 52 | 0.9615 |
+| lang en | 87 | 0.9655 |
 | difficulty easy | 55 | 1.0000 |
 | difficulty medium | 8 | 0.7500 |
 | difficulty hard | 24 | 0.9583 |
 | length short | 87 | 0.9655 |
 
-Every test row fell in the short length bucket on this generator. There is no medium or long slice to report.
+Every test row is English and fell in the short length bucket on this generator. There is no medium or long slice to report. The gate counts below are the same command, remeasured on that English corpus.
 
 ## Paired tests
 

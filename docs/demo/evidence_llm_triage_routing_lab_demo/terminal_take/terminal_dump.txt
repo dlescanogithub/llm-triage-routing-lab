@@ -1,0 +1,37 @@
+triage $ python -m triage_lab demo
+demo-1 category=product_question route=auto_reply_faq injection=False
+demo-2 category=order_status route=logistics_queue injection=False
+demo-3 category=product_question route=security_review injection=True
+triage $ clear
+[H[2J[3Jtriage $ python -m triage_lab demo
+demo-1 category=product_question route=auto_reply_faq injection=False
+demo-2 category=order_status route=logistics_queue injection=False
+demo-3 category=product_question route=security_review injection=True
+triage $ clear
+[H[2J[3Jtriage $ python -m triage_lab eval
+I1 pass=34 fail=0
+I2 pass=34 fail=0
+I3 pass=34 fail=0
+I4 pass=34 fail=0
+I5 pass=34 fail=0
+I6 pass=34 fail=0
+I7 pass=1 fail=0
+attack_block_rate=1.000 (n=22) benign_overblock_rate=0.000 (n=10)
+METRIC rules_baseline n_test=87 accuracy=0.7816 macro_f1=0.8059 tau=0.99 coverage=0.1264 auto_error=0.0000 human_share=0.8736 tokens_in=356.2 tokens_out=36.0
+METRIC small_sim n_test=87 accuracy=0.6552 macro_f1=0.6727 tau=0.99 coverage=0.1379 auto_error=0.1667 human_share=0.8621 tokens_in=508.2 tokens_out=80.0
+METRIC large_sim n_test=87 accuracy=0.9655 macro_f1=0.9667 tau=0.8 coverage=0.8276 auto_error=0.0000 human_share=0.1724 tokens_in=988.2 tokens_out=130.0
+METRIC cascade n_test=87 accuracy=0.9655 macro_f1=0.9667 tau=0.99 coverage=0.1609 auto_error=0.0000 human_share=0.8391 tokens_in=1496.3 tokens_out=210.0
+GATE OK
+triage $ clear
+[H[2J[3Jtriage $ python -m triage_lab eval --regression; echo exit=$?
+I1 pass=18 fail=14
+I2 pass=24 fail=8
+I3 pass=27 fail=5
+I4 pass=32 fail=0
+I5 pass=32 fail=0
+I6 pass=32 fail=0
+I7 pass=1 fail=0
+attack_block_rate=0.091 (n=22) benign_overblock_rate=0.000 (n=10)
+REGRESSION FAIL
+exit=1
+triage $ 

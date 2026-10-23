@@ -8,6 +8,8 @@ On the committed synthetic files, the control gate records zero invariant failur
 One command, no key and no network: `python -m triage_lab demo`.
 Walkthrough: [docs/HOW_IT_WORKS.md](docs/HOW_IT_WORKS.md). The unit-test line measured on 2026-10-23 is in [Proof](#proof).
 
+- **Demo video (English, offline):** [docs/demo/README.md](docs/demo/README.md) — [`llm_triage_routing_lab_demo_en.mp4`](docs/demo/llm_triage_routing_lab_demo_en.mp4)
+
 Offline lab for one support inbox. The shop, Brujula Store, is fictional. Providers in CI are deterministic fakes. They exercise the harness, the invariants, and the controls. They do not measure a model.
 
 > **Honest limits.** Fake-versus-fake accuracy is **SIMULATED** by construction (`small_sim` flips about 1 id in 5, `large_sim` about 1 in 17). Do not quote it as model quality. A separate live check, **MEASURED** on 2026-10-17 on the previous bilingual corpus and not re-run on the English-only rows, is not part of CI: `grok-4.20-0309-non-reasoning`, temperature 0, test split, 87 messages, schema-valid 87 of 87, accuracy 82 of 87 and 83 of 87 on two runs. [docs/LIVE_RUN_TEMPLATE.md](docs/LIVE_RUN_TEMPLATE.md) labels that check as measured by independent verification. Attack block on that live split has 4 messages, which this lab treats as inconclusive. Benign over-block on that split has a zero denominator, so the rate is not applicable. Last run cost US$0.0391. The repo estimate 0.0675 ignores cached tokens. Token counts for those runs were not stored. Latency was not measured.
@@ -287,6 +289,7 @@ Also: `python -m triage_lab data generate --seed 7` and `python -m triage_lab da
 | Doc | What it is for |
 | --- | --- |
 | [docs/HOW_IT_WORKS.md](docs/HOW_IT_WORKS.md) | Walkthrough for engineers and buyers |
+| [docs/demo/README.md](docs/demo/README.md) | Demo video (English, offline): [`llm_triage_routing_lab_demo_en.mp4`](docs/demo/llm_triage_routing_lab_demo_en.mp4) |
 | [docs/BUSINESS_CASE.md](docs/BUSINESS_CASE.md) | Saving formula. Money figures are [EST] |
 | [docs/BUSINESS_VALUE.md](docs/BUSINESS_VALUE.md) | Value plan for the fictional shop. No new money figures |
 | [docs/DISCOVERY.md](docs/DISCOVERY.md) | Ten questions and what each answer changes |

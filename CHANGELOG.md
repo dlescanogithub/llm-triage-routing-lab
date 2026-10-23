@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Add narrated English demo video (`llm_triage_routing_lab_demo_en.mp4`) with subtitles and evidence pack under `docs/demo/`.
+
 ## 0.1.1 - 2026-10-22
 
 - The repository is English. Shop tickets, templates, the FAQ reply, sanitizer markers, the keyword lexicon, fixtures, and docs are English. The small-sample rate label is `not conclusive`. The fictional shop name is `Brujula Store`.

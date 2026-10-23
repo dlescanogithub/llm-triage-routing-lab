@@ -1,0 +1,42 @@
+1
+00:00:00,880 --> 00:00:06,000
+Triage and routing for a support desk, with injection checks, offline on
+fakes.
+
+2
+00:00:06,030 --> 00:00:11,110
+No key. No network. The accuracy figures are simulated by construction.
+
+3
+00:00:12,360 --> 00:00:20,790
+Three scripted tickets: a product question goes to auto FAQ, an order status
+to logistics, and an injection attempt to security review.
+
+4
+00:00:22,080 --> 00:00:32,540
+Gate OK. Invariants I1 through I7: all pass. Attack block rate one point zero
+on twenty-two messages. Benign over-block zero on ten.
+
+5
+00:00:32,590 --> 00:00:39,950
+Cascade accuracy on the test split prints zero point nine six five five. That
+rate is SIMULATED on fake providers.
+
+6
+00:00:41,240 --> 00:00:50,820
+Forced regression with the sanitizer off: REGRESSION FAIL, exit one. Attack
+block collapses to about zero point zero nine one. The gate can go red.
+
+7
+00:00:52,040 --> 00:00:56,500
+Start with shadow mode and a named owner for the taxonomy and for tau.
+
+8
+00:00:56,570 --> 00:01:02,260
+Not covered: a live desk, a real model vendor, or proof that routing already
+shipped.
+
+9
+00:01:02,370 --> 00:01:07,800
+Run python -m triage_lab demo. Lab path cost: zero.
+

@@ -1,6 +1,6 @@
 """Deterministic keyword profiles used by the simulated providers.
 
-``rules_baseline`` is exact phrases after accent folding.
+``rules_baseline`` is exact phrases after lowercasing.
 ``large_sim`` adds typo folding, quote/signature cuts, negation and extra phrases.
 ``small_sim`` starts from the keyword rules and then flips a configured fraction
 of message ids. Those flips are simulated by construction.
@@ -12,41 +12,27 @@ import hashlib
 import re
 from dataclasses import dataclass
 
-ACCENTS = str.maketrans(
-    {
-        "á": "a",
-        "é": "e",
-        "í": "i",
-        "ó": "o",
-        "ú": "u",
-        "ü": "u",
-        "ñ": "n",
-    }
-)
-
 TYPOS = {
-    "rembolso": "reembolso",
+    "refnd": "refund",
     "chnage": "change",
     "shiping": "shipping",
-    "pedio": "pedido",
+    "ordr": "order",
     "chargd": "charged",
     "dimentions": "dimensions",
-    "abogodo": "abogado",
-    "demadar": "demandar",
+    "lawsut": "lawsuit",
     "clik": "click",
     "cliam": "claim",
 }
 
 NEGATIONS = (
-    "no quiero",
-    "no busco",
-    "no pido",
+    "do not want",
+    "not looking for",
+    "not requesting",
     "not asking",
     "not a refund",
     "i am not asking",
-    "todavia no",
-    "sin reembolso",
-    "no es un reembolso",
+    "not yet",
+    "without a refund",
 )
 NEGATED_CATEGORIES = frozenset({"refund_request", "abuse_or_legal"})
 
@@ -63,84 +49,63 @@ PRECEDENCE = (
 
 BASE: dict[str, tuple[str, ...]] = {
     "abuse_or_legal": (
-        "abogado",
         "lawyer",
-        "demanda",
         "lawsuit",
         "legal action",
-        "accion legal",
-        "juicio",
     ),
     "spam": (
         "crypto giveaway",
-        "cripto gratis",
         "click here to claim",
-        "hace clic aqui",
-        "premio exclusivo",
+        "exclusive prize",
     ),
     "refund_request": (
-        "reembolso",
         "refund",
         "money back",
-        "devolver el dinero",
-        "que me devuelvan",
+        "return the money",
     ),
     "payment_issue": (
-        "me cobraron",
         "charged twice",
         "double charge",
-        "pago rechazado",
         "card declined",
     ),
     "shipping_address_change": (
-        "cambiar la direccion",
         "change the address",
-        "cambio de domicilio",
-        "direccion de envio",
         "shipping address",
+        "change of address",
     ),
     "order_status": (
-        "donde esta mi pedido",
         "where is my order",
         "where is order",
-        "numero de seguimiento",
         "tracking number",
-        "estado del pedido",
         "order status",
-        "estado de mi pedido",
+        "status of my order",
     ),
     "complaint": (
-        "queja",
-        "reclamo",
-        "pesimo",
         "complaint",
-        "muy disconforme",
+        "very unhappy",
         "file a complaint",
     ),
     "product_question": (
-        "como se lava",
         "washing",
-        "medidas",
         "dimensions",
-        "de que esta hecho",
-        "instrucciones de",
+        "what is it made of",
+        "instructions for",
         "material",
     ),
 }
 
 EXTRA: dict[str, tuple[str, ...]] = {
-    "abuse_or_legal": ("defensa del consumidor", "denunciar", "demandar", "court"),
+    "abuse_or_legal": ("consumer protection", "report you", "court"),
     "spam": ("crypto prize", "claim your prize"),
     "refund_request": (
-        "devolverme lo que pague",
         "return what i paid",
         "money returned",
     ),
-    "payment_issue": ("cargo duplicado", "cobro duplicado", "charged me twice"),
-    "shipping_address_change": ("otra casa", "mudanza", "new address"),
-    "order_status": ("where is my pedido", "seguimiento"),
-    "complaint": ("atencion fue mala", "dio bola", "very unhappy"),
-    "product_question": ("se puede lavar", "lavar", "how do i wash", "talla"),
+    "payment_issue": ("duplicate charge", "charged me twice"),
+    "shipping_address_change": ("another house", "moving house", "new address"),
+    "order_status": ("where is my parcel",),
+    "complaint": ("service was poor", "ignored this email"),
+    "product_question": ("can i wash", "how do i wash", "size"),
 }
 
 SMALL_FLIP_MOD = 5
@@ -170,8 +135,9 @@ def stable_hash(text: str) -> int:
     return int(hashlib.sha256(text.encode("utf-8")).hexdigest()[:8], 16)
 
 
-def fold_accents(text: str) -> str:
-    return text.lower().translate(ACCENTS)
+def fold_case(text: str) -> str:
+    """Lowercase the text so phrase checks are case-insensitive."""
+    return text.lower()
 
 
 def fold_typos(text: str) -> str:
@@ -186,9 +152,9 @@ def cut_noise(text: str) -> str:
         stripped = line.strip()
         if stripped.startswith(">"):
             continue
-        if "escribio:" in stripped or "wrote:" in stripped:
+        if "wrote:" in stripped:
             break
-        if stripped in {"saludos,", "saludos", "thanks,", "thanks", "gracias,", "--"}:
+        if stripped in {"thanks,", "thanks", "--"}:
             break
         if stripped.startswith("--"):
             break
@@ -277,14 +243,14 @@ def _flip(category: str, message_id: str) -> str:
 
 
 def score_rules(text: str) -> HeuristicPrediction:
-    folded = fold_accents(text)
+    folded = fold_case(text)
     category, margin = _rules_pick(_hits(folded, _lexicon(False), negation=False))
     return HeuristicPrediction(category, _rules_confidence(margin), margin, False)
 
 
 def score_large(text: str) -> HeuristicPrediction:
     """Large profile before the configured id flip."""
-    folded = cut_noise(fold_typos(fold_accents(text)))
+    folded = cut_noise(fold_typos(fold_case(text)))
     category, margin = _earliest_pick(_hits(folded, _lexicon(True), negation=True))
     return HeuristicPrediction(
         category, _large_confidence(margin, False), margin, False

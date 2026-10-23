@@ -1,12 +1,12 @@
 # Confusion matrix: small_sim
 
-Generated: 2026-10-17 (UTC)
+Generated: 2026-10-23 (UTC)
 
 Command: `python -m triage_lab eval`
 
-Package version: 0.1.0
+Package version: 0.1.1
 
-Git commit: `81e3aac00afc5f3662fb20af60aa7642ba198a99`
+Git commit: `4e32b1c1bfade248a9b747f0feb3fa0dbe5ee23c`
 
 Split: test
 
@@ -16,7 +16,7 @@ Simulated profile. This matrix checks the comparison harness, not a real model.
 
 | gold \\ pred | order_status | shipping_address_change | refund_request | payment_issue | product_question | complaint | abuse_or_legal | spam | other |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| order_status | 8 | 0 | 1 | 2 | 0 | 0 | 0 | 0 | 1 |
+| order_status | 9 | 0 | 1 | 2 | 0 | 0 | 0 | 0 | 0 |
 | shipping_address_change | 0 | 4 | 0 | 0 | 1 | 0 | 0 | 0 | 3 |
 | refund_request | 1 | 0 | 5 | 0 | 0 | 0 | 1 | 0 | 3 |
 | payment_issue | 0 | 2 | 1 | 4 | 0 | 0 | 0 | 0 | 2 |
@@ -38,6 +38,6 @@ test auto-routed error: 0.1667
 
 test human-review share: 0.8621
 
-accuracy: 0.6437
+accuracy: 0.6552
 
-macro-F1: 0.6646
+macro-F1: 0.6727

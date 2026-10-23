@@ -6,17 +6,17 @@
 
 On the committed synthetic files, the control gate records zero invariant failures, and the forced regression exits 1 when the sanitizer and the allowlist are turned off.
 One command, no key and no network: `python -m triage_lab demo`.
-Walkthrough: [docs/HOW_IT_WORKS.md](docs/HOW_IT_WORKS.md). The unit-test line measured on 2026-10-22 is in [Proof](#proof).
+Walkthrough: [docs/HOW_IT_WORKS.md](docs/HOW_IT_WORKS.md). The unit-test line measured on 2026-10-23 is in [Proof](#proof).
 
-Offline lab for one support inbox. The shop, Almacén Brújula, is fictional. Providers in CI are deterministic fakes. They exercise the harness, the invariants, and the controls. They do not measure a model.
+Offline lab for one support inbox. The shop, Brujula Store, is fictional. Providers in CI are deterministic fakes. They exercise the harness, the invariants, and the controls. They do not measure a model.
 
-> **Honest limits.** Fake-versus-fake accuracy is **SIMULATED** by construction (`small_sim` flips about 1 id in 5, `large_sim` about 1 in 17). Do not quote it as model quality. A separate live check, **MEASURED** on 2026-10-17, is not part of CI: `grok-4.20-0309-non-reasoning`, temperature 0, test split, 87 messages, schema-valid 87 of 87, accuracy 82 of 87 and 83 of 87 on two runs. [docs/LIVE_RUN_TEMPLATE.md](docs/LIVE_RUN_TEMPLATE.md) labels that check as measured by independent verification. Attack block on that live split has 4 messages, which this lab treats as inconclusive. Benign over-block on that split has a zero denominator, so the rate is not applicable. Last run cost US$0.0391. The repo estimate 0.0675 ignores cached tokens. Token counts for those runs were not stored. Latency was not measured.
+> **Honest limits.** Fake-versus-fake accuracy is **SIMULATED** by construction (`small_sim` flips about 1 id in 5, `large_sim` about 1 in 17). Do not quote it as model quality. A separate live check, **MEASURED** on 2026-10-17 on the previous bilingual corpus and not re-run on the English-only rows, is not part of CI: `grok-4.20-0309-non-reasoning`, temperature 0, test split, 87 messages, schema-valid 87 of 87, accuracy 82 of 87 and 83 of 87 on two runs. [docs/LIVE_RUN_TEMPLATE.md](docs/LIVE_RUN_TEMPLATE.md) labels that check as measured by independent verification. Attack block on that live split has 4 messages, which this lab treats as inconclusive. Benign over-block on that split has a zero denominator, so the rate is not applicable. Last run cost US$0.0391. The repo estimate 0.0675 ignores cached tokens. Token counts for those runs were not stored. Latency was not measured.
 
 ## Problem and result
 
 A support inbox needs a classifier that cannot be talked into a refund or an auto-reply. The result this repo stands on is the control gate, not a model score.
 
-On 2026-10-17, package 0.1.0, commit `81e3aac00afc5f3662fb20af60aa7642ba198a99`, command `python -m triage_lab eval`: **0 invariant failures**. Attack block rate **1.000 on 22 messages** (the eval prints `1.000 (n=22)`) and benign over-block **0.000 on 10 messages** (the eval prints `0.000 (n=10)`) on the known-marker file `data/adversarial.jsonl`. I1 through I6 are counted on 34 messages: the 32-row adversarial file plus two probes (`compromised_sim` and `invalid_sim`). Each of I1–I6 is 34 pass and 0 fail. I7 is one aggregate check: 1 pass and 0 fail. The attack and benign denominators stay on the file slices (22 and 10). The probes are not in those denominators. Profile accuracy in the table below is simulated and is not this result.
+On 2026-10-23, package 0.1.1, commit `4e32b1c1bfade248a9b747f0feb3fa0dbe5ee23c`, command `python -m triage_lab eval`, remeasured on the English corpus: **0 invariant failures**. Attack block rate **1.000 on 22 messages** (the eval prints `1.000 (n=22)`) and benign over-block **0.000 on 10 messages** (the eval prints `0.000 (n=10)`) on the known-marker file `data/adversarial.jsonl`. I1 through I6 are counted on 34 messages: the 32-row adversarial file plus two probes (`compromised_sim` and `invalid_sim`). Each of I1–I6 is 34 pass and 0 fail. I7 is one aggregate check: 1 pass and 0 fail. The attack and benign denominators stay on the file slices (22 and 10). The probes are not in those denominators. Profile accuracy in the table below is simulated and is not this result.
 
 The same date has the live check in the callout above. An earlier same-day check classified 0 of 40 because the prompt did not include the taxonomy. That prompt was corrected. The 0 of 40 figure is history, not the result to cite.
 
@@ -31,7 +31,7 @@ python -m triage_lab demo
 
 `make setup` and `make demo` are the same two steps. `make` may be absent. The `python -m` forms are enough.
 
-**MEASURED** 2026-10-22, package 0.1.0, provider `large_sim`. Stdout was these three lines:
+**MEASURED** 2026-10-23, package 0.1.1, provider `large_sim`. Stdout was these three lines:
 
 ```text
 demo-1 category=product_question route=auto_reply_faq injection=False
@@ -76,18 +76,18 @@ Profiles shipped with the package: `rules_baseline` (keyword lexicon), `small_si
 
 ## Results
 
-Fake versus fake. `small_sim` flips when `stable_hash(id:small)` modulo 5 is 0, and `large_sim` when `stable_hash(id:large)` modulo 17 is 0, so their accuracy is **SIMULATED** by construction. `rules_baseline` is a keyword lexicon, still a fake. Message counts: dev 63, test 87, golden 150. Bootstrap 95 percent interval, 1000 resamples, seed 7, over test messages. Date 2026-10-17. Command `python -m triage_lab eval`. Commit `d5f1a0ec694a34dd2977db170820abf25f9ddb06` for the cost and business-case write-up of this run; the invariant summary file records commit `81e3aac00afc5f3662fb20af60aa7642ba198a99`. Rates below are the published four-decimal rounding of [docs/results/summary.json](docs/results/summary.json). Simulated token counts include the taxonomy prompt and are the three-decimal figures in [docs/COST.md](docs/COST.md).
+Fake versus fake. `small_sim` flips when `stable_hash(id:small)` modulo 5 is 0, and `large_sim` when `stable_hash(id:large)` modulo 17 is 0, so their accuracy is **SIMULATED** by construction. `rules_baseline` is a keyword lexicon, still a fake. Message counts: dev 63, test 87, golden 150. Bootstrap 95 percent interval, 1000 resamples, seed 7, over test messages. Date 2026-10-23. Command `python -m triage_lab eval`. Commit `4e32b1c1bfade248a9b747f0feb3fa0dbe5ee23c`. Rates below are the published four-decimal rounding of [docs/results/summary.json](docs/results/summary.json). Simulated token counts include the taxonomy prompt and are the three-decimal figures in [docs/COST.md](docs/COST.md). This run is on the English corpus.
 
 | Profile | Test accuracy (95 percent CI) | Macro-F1 | ECE | Tau | Dev constraint | Test coverage | Test auto-error | Human share | Sim. tokens in/out |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| rules_baseline | 0.7701 [0.6782, 0.8621] | 0.7987 | 0.1849 | 0.99 | not met | 0.1264 | 0.0000 (0 of 11) | 0.8736 | 357.207 / 36 |
-| small_sim | 0.6437 [0.5402, 0.7471] | 0.6646 | 0.1743 | 0.99 | not met | 0.1379 | 0.1667 (2 of 12) | 0.8621 | 509.207 / 80 |
-| large_sim | 0.9655 [0.9310, 1.0000] | 0.9667 | 0.2037 | 0.90 | met | 0.4023 | 0.0000 (0 of 35) | 0.5977 | 989.207 / 130 |
-| cascade | 0.9655 [0.9310, 1.0000] | 0.9667 | 0.2037 | 0.95 | met | 0.1724 | 0.0000 (0 of 15) | 0.8276 | 1498.414 / 210 |
+| rules_baseline | 0.7816 [0.6897, 0.8736] | 0.8059 | 0.1999 | 0.99 | not met | 0.1264 | 0.0000 (0 of 11) | 0.8736 | 356.172 / 36 |
+| small_sim | 0.6552 [0.5517, 0.7586] | 0.6727 | 0.1628 | 0.99 | not met | 0.1379 | 0.1667 (2 of 12) | 0.8621 | 508.172 / 80 |
+| large_sim | 0.9655 [0.9310, 1.0000] | 0.9667 | 0.2082 | 0.80 | met | 0.8276 | 0.0000 (0 of 72) | 0.1724 | 988.172 / 130 |
+| cascade | 0.9655 [0.9310, 1.0000] | 0.9667 | 0.2082 | 0.99 | met | 0.1609 | 0.0000 (0 of 14) | 0.8391 | 1496.345 / 210 |
 
 `select_tau` picks tau in {0.0, 0.1, …, 0.9, 0.95, 0.99} to maximize dev coverage subject to dev auto-error at or below 0.02. Ties take the higher tau. If none is feasible, tau is 0.99 and the dev constraint is not met. That is why `rules_baseline` and `small_sim` sit at 0.99.
 
-Exact McNemar on the same 87 test messages, harness check only, as printed by that eval (`p_display` in the summary file): large versus small, 32 discordant, p < 0.0001; large versus rules, 21 discordant, p 0.0002; small versus rules, 11 discordant, p 0.0010. These compare fakes.
+Exact McNemar on the same 87 test messages, harness check only, as printed by that eval (`p_display` in the summary file): large versus small, 31 discordant, p < 0.0001; large versus rules, 20 discordant, p 0.0004; small versus rules, 11 discordant, p 0.0010. These compare fakes.
 
 Forced regression, `python -m triage_lab eval --regression` (`naive_sim`, sanitizer and allowlist off): exit **1**. The probes are not added on this path, so the counts are on 32 messages. I1 is 18 pass and 14 fail, I2 is 24 pass and 8 fail, I3 is 27 pass and 5 fail. I4, I5, and I6 are 32 pass and 0 fail. I7 passes. Attack block rate prints as 0.091 on 22 messages (2 of 22; the JSON value is 0.09090909090909091). Benign over-block prints as 0.000 on 10 messages.
 
@@ -97,10 +97,10 @@ Illustrative cost at the [EST] prices above, from the simulated token counts. Th
 
 | Profile | USD per ticket [EST] | USD per 1,000 [EST] |
 | --- | ---: | ---: |
-| rules_baseline | 0.000465 | 0.465 |
-| small_sim | 0.000749 | 0.749 |
-| large_sim | 0.001379 | 1.379 |
-| cascade | 0.002128 | 2.128 |
+| rules_baseline | 0.000464 | 0.464 |
+| small_sim | 0.000748 | 0.748 |
+| large_sim | 0.001378 | 1.378 |
+| cascade | 0.002126 | 2.126 |
 
 ### Measured with a real provider
 
@@ -109,7 +109,7 @@ Not CI. One model, one prompt family, temperature 0, the test split. Recorded in
 | Date | What | Result |
 | --- | --- | --- |
 | 2026-10-17 | `grok-4.20-0309-non-reasoning`, 40 messages, prompt without the taxonomy | schema-valid 0 of 40, all `human_review`. Later corrected. Do not cite as the quality result. |
-| 2026-10-17 | Same model, temperature 0, test split, 87 messages, two runs | schema-valid 87 of 87. Accuracy 82 of 87 and 83 of 87. The repo states that 83 of 87 is 95.4 percent. |
+| 2026-10-17 | Same model, temperature 0, previous bilingual test split, 87 messages, two runs | schema-valid 87 of 87. Accuracy 82 of 87 and 83 of 87. The repo states that 83 of 87 is 95.4 percent. Not re-run on the English-only rows. |
 | 2026-10-17 | Last of those two runs | cost US$0.0391. Repo estimate 0.0675 ignores cached tokens. |
 | 2026-10-17 | Attack block and benign over-block on that live split | 4 attack messages, inconclusive. Benign over-block not applicable (0 messages). |
 
@@ -119,11 +119,11 @@ A comparative live check that used one price for every model recorded **0.0044 U
 
 ### Client-style use cases (fictional, inspired by a pattern, no real client)
 
-Almacén Brújula is the fictional shop already used in this repository. The rows are patterns, not an engagement.
+Brujula Store is the fictional shop already used in this repository. The rows are patterns, not an engagement.
 
 | Use case | Status | Problem | Who approves | Gated effects | How this repo handles it |
 | --- | --- | --- | --- | --- | --- |
-| Support-inbox triage for Almacén Brújula | Implemented as a synthetic lab | Route mail without auto-refunds or an injection that becomes an auto-reply | Taxonomy owner; a named person approves tau | No refund tool; injection goes to `security_review` | Golden set, invariant gate, shadow mode, kill switch |
+| Support-inbox triage for Brujula Store | Implemented as a synthetic lab | Route mail without auto-refunds or an injection that becomes an auto-reply | Taxonomy owner; a named person approves tau | No refund tool; injection goes to `security_review` | Golden set, invariant gate, shadow mode, kill switch |
 | Internal IT helpdesk routing | Design only | Same pattern, different taxonomy | Catalog owner | Read-only lookups | Not built |
 | Regulated-sector intake | Design only | Stricter fallback and audit | Compliance approves tau and the log schema | More `human_review`; no auto-reply | Described in [docs/SCOPE.md](docs/SCOPE.md) only |
 
@@ -142,7 +142,7 @@ Almacén Brújula is the fictional shop already used in this repository. The row
 | Live adapter | Implemented, off unless `LIVE_LLM` is 1. The 2026-10-17 check above is **MEASURED** and is not in CI |
 | SFT export to a local JSONL | Implemented as a file export. No training run and no upload |
 | Fine-tuning, IMAP or webhook ingest, helpdesk connector, SSO or RBAC | Design only |
-| Languages other than Spanish and English, drift monitors, a PII redaction service | Design only |
+| Languages other than English, drift monitors, a PII redaction service | Design only |
 
 ### Governance checklist
 
@@ -159,7 +159,7 @@ Almacén Brújula is the fictional shop already used in this repository. The row
 | Secrets stay out of the tree | `src/triage_lab/secretscan.py`, `.env.example`. CI runs the scan |
 | No paid call in CI | The workflow does not set `LIVE_LLM`. Tests inject a transport. `urllib` is not used in tests |
 
-Not covered yet: SSO or RBAC, drift monitors on a live inbox, a PII redaction service, helpdesk webhooks, languages other than Spanish and English, and a real mailbox.
+Not covered yet: SSO or RBAC, drift monitors on a live inbox, a PII redaction service, helpdesk webhooks, languages other than English, and a real mailbox.
 
 ### Business strategy
 
@@ -169,24 +169,24 @@ Deployment conversation: start with the ten questions in [docs/DISCOVERY.md](doc
 
 ## Business value
 
-> **Same fictional shop.** Almacén Brújula is invented for this lab. It is not an employer or a client. Money figures below are the repo's own **[EST]** placeholders, not a new set of assumptions. Full plan: [docs/BUSINESS_VALUE.md](docs/BUSINESS_VALUE.md).
+> **Same fictional shop.** Brujula Store is invented for this lab. It is not an employer or a client. Money figures below are the repo's own **[EST]** placeholders, not a new set of assumptions. Full plan: [docs/BUSINESS_VALUE.md](docs/BUSINESS_VALUE.md).
 
 **What the repo can point at:**
 
-- **MEASURED** gate, 2026-10-17: 0 invariant failures on the committed adversarial file; attack block 1.000 on 22 messages; benign over-block 0.000 on 10 messages.
+- **MEASURED** gate, 2026-10-23: 0 invariant failures on the committed adversarial file; attack block 1.000 on 22 messages; benign over-block 0.000 on 10 messages.
 - **MEASURED** forced regression: exit 1 when the sanitizer and the allowlist are off.
-- **MEASURED** live sample, 2026-10-17, one model, 87 messages, two accuracy runs: schema-valid 87 of 87, accuracy 82 of 87 and 83 of 87. Not a launch metric. Attack count 4 is inconclusive.
-- **SIMULATED** `large_sim` operating point on that eval: test human share 0.5977, test auto-error 0 of 35, dev constraint met at tau 0.90.
-- **[EST]** saving versus all-human at USD 1.00 per ticket, for that `large_sim` point: **0.401 USD per ticket**. At the published illustration of 10,000 tickets in a month, the operating difference is **4,010 USD** in that month. Build hours are not in the repo, so a project payback is not stated.
+- **MEASURED** live sample, 2026-10-17, previous bilingual corpus, one model, 87 messages, two accuracy runs: schema-valid 87 of 87, accuracy 82 of 87 and 83 of 87. Not re-run on the English-only rows. Not a launch metric. Attack count 4 is inconclusive.
+- **SIMULATED** `large_sim` operating point on the 2026-10-23 eval: test human share 0.1724, test auto-error 0 of 72, dev constraint met at tau 0.80.
+- **[EST]** saving versus all-human at USD 1.00 per ticket, for that `large_sim` point: **0.826 USD per ticket**. At the published illustration of 10,000 tickets in a month, the operating difference is **8,260 USD** in that month. Build hours are not in the repo, so a project payback is not stated.
 
 | KPI | Category | Baseline | Target |
 | --- | --- | --- | --- |
-| Invariant failures on the lab gate | Resilience | 0 on the 2026-10-17 eval [MEASURED] | Exit 0, and the forced regression stays exit 1 [repo exit criteria] |
+| Invariant failures on the lab gate | Resilience | 0 on the 2026-10-23 eval [MEASURED] | Exit 0, and the forced regression stays exit 1 [repo exit criteria] |
 | Attack block on the known-marker file | Risk | 1.000 on 22 messages [MEASURED] | The gate, on that file. Not a field rate |
 | Benign over-block | Experience | 0.000 on 10 messages [MEASURED] | At or below 0.10 (I7) |
 | Dev auto-error | Quality | `large_sim` met the 0.02 cap; rules and small did not [SIMULATED] | At or below 0.02 on dev, tau frozen before test |
-| Human share | Productivity | All-human, share 1 [EST baseline] | No numeric target in the repo. Reported test share for `large_sim` is 0.5977 [SIMULATED] |
-| USD per ticket, blended | Cost | 1.00 all-human [EST] | `large_sim` blended 0.599 [EST]. Not a measured invoice |
+| Human share | Productivity | All-human, share 1 [EST baseline] | No numeric target in the repo. Reported test share for `large_sim` is 0.1724 [SIMULATED] |
+| USD per ticket, blended | Cost | 1.00 all-human [EST] | `large_sim` blended 0.174 [EST]. Not a measured invoice |
 | Live schema and accuracy | Quality | 87 of 87 schema-valid; 82 and 83 of 87 [MEASURED, one model] | No launch target in the repo |
 | Time to route | Experience | Not measured | Left blank on purpose |
 
@@ -203,7 +203,7 @@ The robust claim is the control (no refund tool, known-marker containment, a kil
 
 Reporting path and the controls the code enforces: [SECURITY.md](SECURITY.md). Threat notes with owners: [docs/RISKS.md](docs/RISKS.md).
 
-The sanitizer only neutralizes the marker list in `src/triage_lab/sanitize.py`. A phrase that is not on that list is not flagged. Attack block 1.000 on 22 messages is on the committed file, which uses that list. A denominator of 0 is not applicable, not 0. A count from 1 to 4 is labelled inconclusive. The source string for that label is Spanish; this README uses the English word.
+The sanitizer only neutralizes the marker list in `src/triage_lab/sanitize.py`. A phrase that is not on that list is not flagged. Attack block 1.000 on 22 messages is on the committed file, which uses that list. A denominator of 0 is not applicable, not 0. A count from 1 to 4 is labelled `not conclusive`.
 
 Labels were written with the text. There is no agreement study. See [data/LABELS.md](data/LABELS.md).
 
@@ -223,7 +223,7 @@ A Dockerfile is in the repo. The CI workflow does not build it. Python 3.11 and 
 
 ## Proof
 
-**MEASURED** 2026-10-22. Package 0.1.0. Python 3.12.3. pytest 9.1.1 (pytest-cov 7.1.0). This documentation change does not modify `src/` or `tests/`.
+**MEASURED** 2026-10-23. Package 0.1.1. Python 3.12.3. pytest 9.1.1 (pytest-cov 7.1.0). This run measures the English corpus and lexicon in `src/` and `tests/`.
 
 Command:
 
@@ -233,9 +233,9 @@ python -m pytest --cov=triage_lab --cov-report=term-missing --cov-fail-under=80
 
 Those three flags are already `addopts` in `pyproject.toml`. The CI test step is `python -m pytest`, which applies the same flags. The command above passed them explicitly as well.
 
-Result: **77 passed**. The pytest-cov total line was **91.38%** (`Total coverage: 91.38%`). The coverage table rounds that same total to 91 percent (2019 statements, 174 missed). The run also printed `CoverageWarning: Module triage_lab was previously imported, but not measured`. The 91.38 percent figure is the total pytest-cov printed anyway. The configured floor is 80 percent. This run cleared it.
+Result: **77 passed**. The pytest-cov total line was **91.28%** (`Total coverage: 91.28%`). The coverage table rounds that same total to 91 percent (2018 statements, 176 missed). The run also printed `CoverageWarning: Module triage_lab was previously imported, but not measured`. The 91.28 percent figure is the total pytest-cov printed anyway. The configured floor is 80 percent. This run cleared it.
 
-This is the unit-test proof. It is not the eval gate and not the live check. Those are dated 2026-10-17 in [Results](#results).
+This is the unit-test proof. It is not the eval gate and not the live check. The simulated eval in [Results](#results) is dated 2026-10-23. The live check there is dated 2026-10-17 and was measured on the previous bilingual corpus.
 
 ## How to reproduce
 

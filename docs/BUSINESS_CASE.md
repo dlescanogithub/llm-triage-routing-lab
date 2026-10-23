@@ -1,6 +1,6 @@
 # Business case
 
-Fictional shop: Almacén Brújula. No fees were charged and none are quoted as real.
+Fictional shop: Brujula Store. No fees were charged and none are quoted as real.
 
 ## Baseline
 
@@ -16,18 +16,18 @@ saving_usd = human_usd - blended_usd
 
 `human_share` and `auto_error` come from the test split of a named run. `tokens_*` in this repo are simulated (character heuristic plus profile overhead). `price_in` and `price_out` used below are **[EST] 1.00 and 3.00 USD per million tokens**. `human_usd` is **[EST] 1.00**.
 
-Worked example for `large_sim` on the 2026-10-17 run (`python -m triage_lab eval`, commit `d5f1a0ec694a34dd2977db170820abf25f9ddb06`, package 0.1.0). The token term ignores cached tokens:
+Worked example for `large_sim` on the 2026-10-23 English-corpus run (`python -m triage_lab eval`, commit `4e32b1c1bfade248a9b747f0feb3fa0dbe5ee23c`, package 0.1.1). The token term ignores cached tokens:
 
-- simulated tokens 989.207 / 130 per ticket
-- model_usd = 0.001379
-- human_share = 0.5977, auto_error among auto-routed = 0.0000
-- blended_usd = 0.001379 + 0.5977 * 1.00 + 0 = 0.599 **[EST]**
-- saving vs all-human = 0.401 USD/ticket **[EST]**
+- simulated tokens 988.172 / 130 per ticket
+- model_usd = 0.001378
+- human_share = 0.1724, auto_error among auto-routed = 0.0000 (0 of 72)
+- blended_usd = 0.001378 + 0.1724 * 1.00 + 0 = 0.174 **[EST]**
+- saving vs all-human = 0.826 USD/ticket **[EST]**
 
-That saving is only as good as the human share. On this draw the dev constraint (auto-routed error <= 2%) forces tau 0.90 and still leaves about 60% of test tickets with a person. `rules_baseline` and `small_sim` do not meet the dev constraint at any tau; their reported tau is 0.99 and the human share is about 0.87. Do not use the 0.9655 accuracy of `large_sim` in this formula: that accuracy is simulated by construction.
+That saving is only as good as the human share. On this draw the dev constraint (auto-routed error <= 2%) is met at tau 0.80, and the test human share is 0.1724 (about 17% of test tickets still go to a person). `rules_baseline` and `small_sim` do not meet the dev constraint at any tau; their reported tau is 0.99 and the human share is about 0.87. The 0.9655 accuracy of `large_sim` stays out of this formula: that accuracy is simulated by construction.
 
 If auto-error were 2% on a 40% auto-route share, misroute would add 0.40 * 0.02 * 8.00 = 0.064 USD/ticket **[EST]**. The gate's job is to keep that term small.
 
 ## What would change the case
 
-Independent live checks on 2026-10-17 (`grok-4.20-0309-non-reasoning`, temperature 0, test split, n=87), measured by independent verification: schema-valid 87/87, accuracy 82/87 and 83/87 (range 82–83/87; 83/87 is 95.4%). Last run cost US$0.0391; the repo estimate 0.0675 ignores cached tokens. Attack block on that split is n=4, no concluyente. Benign over-block is n/a (n=0). The earlier same-day check classified 0/40 (prompt without taxonomy, corrected). The [EST] saving above still uses simulated tokens and a placeholder human cost; it is not this live bill. Volume sensitivity is in `docs/COST.md`.
+Independent live checks on 2026-10-17 (`grok-4.20-0309-non-reasoning`, temperature 0, test split, n=87), measured by independent verification on the previous bilingual corpus, not re-run on the English-only rows: schema-valid 87/87, accuracy 82/87 and 83/87 (range 82–83/87; 83/87 is 95.4%). Last run cost US$0.0391; the repo estimate 0.0675 ignores cached tokens. Attack block on that split is n=4, not conclusive. Benign over-block is n/a (n=0). The earlier same-day check classified 0/40 (prompt without taxonomy, corrected). The [EST] saving above still uses simulated tokens and a placeholder human cost; it is not this live bill. Volume sensitivity is in `docs/COST.md`.

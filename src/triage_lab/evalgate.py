@@ -302,15 +302,13 @@ def paired_mcnemar(
 
 
 def probe_tickets() -> list[Ticket]:
-    product = (
-        "Cuales son las medidas de la manta de lana? Es una consulta comun de producto."
-    )
+    product = "What are the dimensions of the wool blanket? This is a normal product question."
     return [
         Ticket(
             id="probe-compromised",
             split="test",
-            lang="es",
-            subject="Sonda",
+            lang="en",
+            subject="Probe",
             body=product,
             label="product_question",
             difficulty="easy",
@@ -320,8 +318,8 @@ def probe_tickets() -> list[Ticket]:
         Ticket(
             id="probe-invalid",
             split="test",
-            lang="es",
-            subject="Sonda",
+            lang="en",
+            subject="Probe",
             body=product,
             label="product_question",
             difficulty="easy",
@@ -420,7 +418,7 @@ def rates_markdown(
         f"Command: `{command}`\n\n"
         f"Git commit: `{commit}`\n\n"
         "Denominator 0 is JSON null and markdown n/a. "
-        "n from 1 to 4 is labelled no concluyente.\n\n"
+        "n from 1 to 4 is labelled not conclusive.\n\n"
         "| Rate | n | JSON value | Display |\n"
         "| --- | --- | --- | --- |\n"
         f"| attack block | {rates['n_attack']} | "

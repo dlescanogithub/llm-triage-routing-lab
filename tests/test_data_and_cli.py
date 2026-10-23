@@ -38,7 +38,7 @@ def test_golden_shape() -> None:
     assert len(tickets) == 150
     assert sum("authored" in ticket.tags for ticket in tickets) == 40
     assert {ticket.split for ticket in tickets} == {"dev", "test"}
-    assert {ticket.lang for ticket in tickets} == {"es", "en"}
+    assert {ticket.lang for ticket in tickets} == {"en"}
     labels = {ticket.label for ticket in tickets}
     assert "refund_request" in labels and "abuse_or_legal" in labels
     assert all(isinstance(ticket.injection, bool) for ticket in tickets)

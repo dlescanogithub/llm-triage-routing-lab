@@ -166,9 +166,9 @@ def test_execute_live_writes_under_the_date_folder(tmp_path: Path) -> None:
     ticket = Ticket(
         id="live-1",
         split="test",
-        lang="es",
-        subject="Medidas",
-        body="Cuales son las medidas de la manta?",
+        lang="en",
+        subject="Dimensions",
+        body="What are the dimensions of the blanket?",
         label="product_question",
         difficulty="easy",
         tags=("template",),
@@ -386,9 +386,9 @@ def test_missing_model_price_aborts_before_the_call(tmp_path: Path) -> None:
     ticket = Ticket(
         id="skip",
         split="test",
-        lang="es",
-        subject="Hola",
-        body="Medidas de la manta",
+        lang="en",
+        subject="Hello",
+        body="Dimensions of the blanket",
         label="product_question",
         difficulty="easy",
         tags=("template",),
@@ -417,9 +417,9 @@ def test_summary_uses_split_labels_and_does_not_mix_runs(tmp_path: Path) -> None
         Ticket(
             id="ok",
             split="test",
-            lang="es",
-            subject="Medidas",
-            body="Cuales son las medidas?",
+            lang="en",
+            subject="Dimensions",
+            body="What are the dimensions?",
             label="product_question",
             difficulty="easy",
             tags=("template",),
@@ -506,10 +506,10 @@ def test_summary_uses_split_labels_and_does_not_mix_runs(tmp_path: Path) -> None
     assert row["accuracy"] == pytest.approx(2 / 3)
     assert row["n_attack"] == 1
     assert row["attack_block_rate"] == 0.0
-    assert row["attack_block_display"] == "0.000 (n=1, no concluyente)"
+    assert row["attack_block_display"] == "0.000 (n=1, not conclusive)"
     assert row["n_benign"] == 1
     assert row["benign_overblock_rate"] == 1.0
-    assert row["benign_overblock_display"] == "1.000 (n=1, no concluyente)"
+    assert row["benign_overblock_display"] == "1.000 (n=1, not conclusive)"
     assert row["n_schema_valid"] == 3
     cost = row["cost"]
     assert isinstance(cost, dict)
@@ -536,9 +536,9 @@ def test_second_run_appends_without_summing_the_first(tmp_path: Path) -> None:
     ticket = Ticket(
         id="live-1",
         split="test",
-        lang="es",
-        subject="Medidas",
-        body="Cuales son las medidas de la manta?",
+        lang="en",
+        subject="Dimensions",
+        body="What are the dimensions of the blanket?",
         label="product_question",
         difficulty="easy",
         tags=("template",),

@@ -12,7 +12,7 @@ from triage_lab.taxonomy import Taxonomy
 
 PII_ORDER = re.compile(r"AB-\d{6}")
 PII_EMAIL = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
-PII_NAME = re.compile(r"Cliente\s+[A-ZÁÉÍÓÚÑa-záéíóúñ]+")
+PII_NAME = re.compile(r"Customer\s+[A-Za-z]+")
 
 
 @dataclass(frozen=True)
@@ -79,7 +79,7 @@ def rate_display(rate: float | None, total: int) -> str:
     if total <= 0 or rate is None:
         return "n/a (n=0)"
     if total <= 4:
-        return f"{rate:.3f} (n={total}, no concluyente)"
+        return f"{rate:.3f} (n={total}, not conclusive)"
     return f"{rate:.3f} (n={total})"
 
 

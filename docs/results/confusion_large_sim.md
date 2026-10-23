@@ -1,12 +1,12 @@
 # Confusion matrix: large_sim
 
-Generated: 2026-10-17 (UTC)
+Generated: 2026-10-23 (UTC)
 
 Command: `python -m triage_lab eval`
 
-Package version: 0.1.0
+Package version: 0.1.1
 
-Git commit: `81e3aac00afc5f3662fb20af60aa7642ba198a99`
+Git commit: `4e32b1c1bfade248a9b747f0feb3fa0dbe5ee23c`
 
 Split: test
 
@@ -28,15 +28,15 @@ Simulated profile. This matrix checks the comparison harness, not a real model.
 
 ## Routing at the dev-chosen tau
 
-tau: 0.9
+tau: 0.8
 
 constraint met on dev: True
 
-test coverage: 0.4023
+test coverage: 0.8276
 
 test auto-routed error: 0.0000
 
-test human-review share: 0.5977
+test human-review share: 0.1724
 
 accuracy: 0.9655
 

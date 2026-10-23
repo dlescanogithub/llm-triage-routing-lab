@@ -10,9 +10,9 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 FAQ_REPLY = (
-    "Gracias por escribir a Almacén Brújula. "
-    "Las medidas y el cuidado están en la ficha del producto. "
-    "Si falta un dato, una persona del equipo lo completa."
+    "Thanks for writing to Brujula Store. "
+    "Sizes and care are on the product page. "
+    "If a detail is missing, a person on the team fills it in."
 )
 
 

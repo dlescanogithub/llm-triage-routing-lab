@@ -1,12 +1,12 @@
 # Adversarial rates
 
-Generated: 2026-10-17 (UTC)
+Generated: 2026-10-23 (UTC)
 
 Command: `python -m triage_lab eval`
 
-Git commit: `81e3aac00afc5f3662fb20af60aa7642ba198a99`
+Git commit: `4e32b1c1bfade248a9b747f0feb3fa0dbe5ee23c`
 
-Denominator 0 is JSON null and markdown n/a. n from 1 to 4 is labelled no concluyente.
+Denominator 0 is JSON null and markdown n/a. n from 1 to 4 is labelled not conclusive.
 
 | Rate | n | JSON value | Display |
 | --- | --- | --- | --- |

@@ -16,7 +16,7 @@ Offline lab for one support inbox. The shop, Brujula Store, is fictional. Provid
 
 A support inbox needs a classifier that cannot be talked into a refund or an auto-reply. The result this repo stands on is the control gate, not a model score.
 
-On 2026-10-23, package 0.1.1, commit `8fa0e2217fa3f00c5d4f375b281e300b0c1b1ac5`, command `python -m triage_lab eval`, remeasured on the English corpus: **0 invariant failures**. Attack block rate **1.000 on 22 messages** (the eval prints `1.000 (n=22)`) and benign over-block **0.000 on 10 messages** (the eval prints `0.000 (n=10)`) on the known-marker file `data/adversarial.jsonl`. I1 through I6 are counted on 34 messages: the 32-row adversarial file plus two probes (`compromised_sim` and `invalid_sim`). Each of I1–I6 is 34 pass and 0 fail. I7 is one aggregate check: 1 pass and 0 fail. The attack and benign denominators stay on the file slices (22 and 10). The probes are not in those denominators. Profile accuracy in the table below is simulated and is not this result.
+On 2026-10-23, package 0.1.1, commit `4e32b1c1bfade248a9b747f0feb3fa0dbe5ee23c`, command `python -m triage_lab eval`, remeasured on the English corpus: **0 invariant failures**. Attack block rate **1.000 on 22 messages** (the eval prints `1.000 (n=22)`) and benign over-block **0.000 on 10 messages** (the eval prints `0.000 (n=10)`) on the known-marker file `data/adversarial.jsonl`. I1 through I6 are counted on 34 messages: the 32-row adversarial file plus two probes (`compromised_sim` and `invalid_sim`). Each of I1–I6 is 34 pass and 0 fail. I7 is one aggregate check: 1 pass and 0 fail. The attack and benign denominators stay on the file slices (22 and 10). The probes are not in those denominators. Profile accuracy in the table below is simulated and is not this result.
 
 The same date has the live check in the callout above. An earlier same-day check classified 0 of 40 because the prompt did not include the taxonomy. That prompt was corrected. The 0 of 40 figure is history, not the result to cite.
 
@@ -76,14 +76,14 @@ Profiles shipped with the package: `rules_baseline` (keyword lexicon), `small_si
 
 ## Results
 
-Fake versus fake. `small_sim` flips when `stable_hash(id:small)` modulo 5 is 0, and `large_sim` when `stable_hash(id:large)` modulo 17 is 0, so their accuracy is **SIMULATED** by construction. `rules_baseline` is a keyword lexicon, still a fake. Message counts: dev 63, test 87, golden 150. Bootstrap 95 percent interval, 1000 resamples, seed 7, over test messages. Date 2026-10-23. Command `python -m triage_lab eval`. Commit `8fa0e2217fa3f00c5d4f375b281e300b0c1b1ac5`. Rates below are the published four-decimal rounding of [docs/results/summary.json](docs/results/summary.json). Simulated token counts include the taxonomy prompt and are the three-decimal figures in [docs/COST.md](docs/COST.md). This run is on the English corpus.
+Fake versus fake. `small_sim` flips when `stable_hash(id:small)` modulo 5 is 0, and `large_sim` when `stable_hash(id:large)` modulo 17 is 0, so their accuracy is **SIMULATED** by construction. `rules_baseline` is a keyword lexicon, still a fake. Message counts: dev 63, test 87, golden 150. Bootstrap 95 percent interval, 1000 resamples, seed 7, over test messages. Date 2026-10-23. Command `python -m triage_lab eval`. Commit `4e32b1c1bfade248a9b747f0feb3fa0dbe5ee23c`. Rates below are the published four-decimal rounding of [docs/results/summary.json](docs/results/summary.json). Simulated token counts include the taxonomy prompt and are the three-decimal figures in [docs/COST.md](docs/COST.md). This run is on the English corpus.
 
 | Profile | Test accuracy (95 percent CI) | Macro-F1 | ECE | Tau | Dev constraint | Test coverage | Test auto-error | Human share | Sim. tokens in/out |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| rules_baseline | 0.7816 [0.6897, 0.8736] | 0.8059 | 0.1999 | 0.99 | not met | 0.1264 | 0.0000 (0 of 11) | 0.8736 | 356.701 / 36 |
-| small_sim | 0.6552 [0.5517, 0.7586] | 0.6727 | 0.1628 | 0.99 | not met | 0.1379 | 0.1667 (2 of 12) | 0.8621 | 508.701 / 80 |
-| large_sim | 0.9655 [0.9310, 1.0000] | 0.9667 | 0.2082 | 0.80 | met | 0.8276 | 0.0000 (0 of 72) | 0.1724 | 988.701 / 130 |
-| cascade | 0.9655 [0.9310, 1.0000] | 0.9667 | 0.2082 | 0.99 | met | 0.1609 | 0.0000 (0 of 14) | 0.8391 | 1497.402 / 210 |
+| rules_baseline | 0.7816 [0.6897, 0.8736] | 0.8059 | 0.1999 | 0.99 | not met | 0.1264 | 0.0000 (0 of 11) | 0.8736 | 356.172 / 36 |
+| small_sim | 0.6552 [0.5517, 0.7586] | 0.6727 | 0.1628 | 0.99 | not met | 0.1379 | 0.1667 (2 of 12) | 0.8621 | 508.172 / 80 |
+| large_sim | 0.9655 [0.9310, 1.0000] | 0.9667 | 0.2082 | 0.80 | met | 0.8276 | 0.0000 (0 of 72) | 0.1724 | 988.172 / 130 |
+| cascade | 0.9655 [0.9310, 1.0000] | 0.9667 | 0.2082 | 0.99 | met | 0.1609 | 0.0000 (0 of 14) | 0.8391 | 1496.345 / 210 |
 
 `select_tau` picks tau in {0.0, 0.1, …, 0.9, 0.95, 0.99} to maximize dev coverage subject to dev auto-error at or below 0.02. Ties take the higher tau. If none is feasible, tau is 0.99 and the dev constraint is not met. That is why `rules_baseline` and `small_sim` sit at 0.99.
 
@@ -97,10 +97,10 @@ Illustrative cost at the [EST] prices above, from the simulated token counts. Th
 
 | Profile | USD per ticket [EST] | USD per 1,000 [EST] |
 | --- | ---: | ---: |
-| rules_baseline | 0.000465 | 0.465 |
-| small_sim | 0.000749 | 0.749 |
-| large_sim | 0.001379 | 1.379 |
-| cascade | 0.002127 | 2.127 |
+| rules_baseline | 0.000464 | 0.464 |
+| small_sim | 0.000748 | 0.748 |
+| large_sim | 0.001378 | 1.378 |
+| cascade | 0.002126 | 2.126 |
 
 ### Measured with a real provider
 

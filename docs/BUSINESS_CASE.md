@@ -16,12 +16,12 @@ saving_usd = human_usd - blended_usd
 
 `human_share` and `auto_error` come from the test split of a named run. `tokens_*` in this repo are simulated (character heuristic plus profile overhead). `price_in` and `price_out` used below are **[EST] 1.00 and 3.00 USD per million tokens**. `human_usd` is **[EST] 1.00**.
 
-Worked example for `large_sim` on the 2026-10-23 English-corpus run (`python -m triage_lab eval`, commit `8fa0e2217fa3f00c5d4f375b281e300b0c1b1ac5`, package 0.1.1). The token term ignores cached tokens:
+Worked example for `large_sim` on the 2026-10-23 English-corpus run (`python -m triage_lab eval`, commit `4e32b1c1bfade248a9b747f0feb3fa0dbe5ee23c`, package 0.1.1). The token term ignores cached tokens:
 
-- simulated tokens 988.701 / 130 per ticket
-- model_usd = 0.001379
+- simulated tokens 988.172 / 130 per ticket
+- model_usd = 0.001378
 - human_share = 0.1724, auto_error among auto-routed = 0.0000 (0 of 72)
-- blended_usd = 0.001379 + 0.1724 * 1.00 + 0 = 0.174 **[EST]**
+- blended_usd = 0.001378 + 0.1724 * 1.00 + 0 = 0.174 **[EST]**
 - saving vs all-human = 0.826 USD/ticket **[EST]**
 
 That saving is only as good as the human share. On this draw the dev constraint (auto-routed error <= 2%) is met at tau 0.80, and the test human share is 0.1724 (about 17% of test tickets still go to a person). `rules_baseline` and `small_sim` do not meet the dev constraint at any tau; their reported tau is 0.99 and the human share is about 0.87. The 0.9655 accuracy of `large_sim` stays out of this formula: that accuracy is simulated by construction.

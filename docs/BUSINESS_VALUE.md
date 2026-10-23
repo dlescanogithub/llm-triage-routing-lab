@@ -10,7 +10,7 @@
 >   - **SIMULATED**: a fake profile whose errors are configured, or a token count from the character heuristic.
 >   - **UNVERIFIED**: a live or business claim this repo does not store enough evidence to close.
 > - No **[SYN]** figure is introduced. The sibling labs use that tag for invented volumes and rates. This repo already has its own [EST] volume table, and this file stays inside it.
-> - Package 0.1.1. Simulated eval and cost figures below are the 2026-10-23 English-corpus run (`python -m triage_lab eval`, commit `8fa0e2217fa3f00c5d4f375b281e300b0c1b1ac5`). The unit-test line is in the README section "Proof".
+> - Package 0.1.1. Simulated eval and cost figures below are the 2026-10-23 English-corpus run (`python -m triage_lab eval`, commit `4e32b1c1bfade248a9b747f0feb3fa0dbe5ee23c`). The unit-test line is in the README section "Proof".
 
 ## Buyer and problem
 
@@ -86,13 +86,13 @@ Prices are described as "chosen for arithmetic." Date of the token measurement: 
 
 Copied from the business case. Tokens are simulated.
 
-- Simulated tokens 988.701 in and 130 out per ticket.
-- `model_usd` = 0.001379.
+- Simulated tokens 988.172 in and 130 out per ticket.
+- `model_usd` = 0.001378.
 - Test human share 0.1724. Auto-error among auto-routed = 0.0000 (0 of 72).
-- `blended_usd` = 0.001379 + 0.1724 times 1.00 + 0 = **0.174 [EST]**.
+- `blended_usd` = 0.001378 + 0.1724 times 1.00 + 0 = **0.174 [EST]**.
 - Saving versus all-human = **0.826 USD per ticket [EST]**.
 
-`cascade` on the same draw meets the dev constraint at tau 0.99, with test human share 0.8391 and blended **0.841 [EST]** ([docs/COST.md](COST.md)). Saving versus USD 1.00 is 0.159 per ticket by the same formula. The cascade still sends most tickets to a person, so the saving is smaller. Tokens 1497.402 in and 210 out are simulated and include both calls.
+`cascade` on the same draw meets the dev constraint at tau 0.99, with test human share 0.8391 and blended **0.841 [EST]** ([docs/COST.md](COST.md)). Saving versus USD 1.00 is 0.159 per ticket by the same formula. The cascade still sends most tickets to a person, so the saving is smaller. Tokens 1496.345 in and 210 out are simulated and include both calls.
 
 `rules_baseline` blended 0.874 and `small_sim` blended 0.863 are printed in the cost note and are **not** approved operating points. The dev constraint was not met.
 
@@ -120,10 +120,10 @@ Providers in the profile rows are simulated. Accuracy in those rows is not a mod
 
 | Scenario | Tokens in/out per ticket (simulated) | USD per ticket [EST] | USD per 1,000 [EST] | Test human share | Blended USD per ticket [EST] | Dev constraint |
 | --- | --- | ---: | ---: | ---: | ---: | --- |
-| rules_baseline | 356.701 / 36 | 0.000465 | 0.465 | 0.8736 | 0.874 | not met |
-| small_sim | 508.701 / 80 | 0.000749 | 0.749 | 0.8621 | 0.863 | not met |
-| large_sim | 988.701 / 130 | 0.001379 | 1.379 | 0.1724 | 0.174 | met |
-| cascade | 1497.402 / 210 | 0.002127 | 2.127 | 0.8391 | 0.841 | met |
+| rules_baseline | 356.172 / 36 | 0.000464 | 0.464 | 0.8736 | 0.874 | not met |
+| small_sim | 508.172 / 80 | 0.000748 | 0.748 | 0.8621 | 0.863 | not met |
+| large_sim | 988.172 / 130 | 0.001378 | 1.378 | 0.1724 | 0.174 | met |
+| cascade | 1496.345 / 210 | 0.002126 | 2.126 | 0.8391 | 0.841 | met |
 | live, `grok-4.20-0309-non-reasoning` | not stored | not measured as a per-ticket [EST] row | not measured | not in this table | not in this table | not applicable |
 
 The live row is **MEASURED** on the previous bilingual corpus, not re-run on the English-only rows: schema-valid 87 of 87, accuracy 82 of 87 and 83 of 87, last run US$0.0391, repo estimate 0.0675 ignoring cached tokens. Attack block on that split is inconclusive (4 messages). Benign over-block is not applicable (0 messages). An earlier same-day check was 0 of 40 schema-valid because the prompt lacked the taxonomy. That prompt was corrected.
@@ -134,9 +134,9 @@ Copied from [docs/COST.md](COST.md). The blended column uses only the `large_sim
 
 | Tickets in the month | rules model USD [EST] | large model USD [EST] | cascade model USD [EST] | large blended USD [EST] |
 | --- | ---: | ---: | ---: | ---: |
-| 1,000 | 0.47 | 1.38 | 2.13 | 174 |
-| 10,000 | 4.65 | 13.79 | 21.27 | 1,740 |
-| 50,000 | 23.25 | 68.95 | 106.35 | 8,700 |
+| 1,000 | 0.46 | 1.38 | 2.13 | 174 |
+| 10,000 | 4.64 | 13.78 | 21.26 | 1,740 |
+| 50,000 | 23.20 | 68.90 | 106.30 | 8,700 |
 
 A comparative live check that used one price for every model recorded 0.0044 USD for `grok-4.3` against about 0.0131 USD at that model's own rate (2026-10-17, reported from the run, not recomputed here). A missing row in `LLM_MODEL_PRICE_TABLE` aborts before the call.
 

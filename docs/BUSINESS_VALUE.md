@@ -14,7 +14,7 @@
 
 ## Buyer and problem
 
-The buyer in this exercise is the owner of one support inbox at the fictional shop. The inbox is Spanish and English, nine categories, six routes ([docs/SCOPE.md](SCOPE.md)).
+The buyer for this lab is the owner of one support inbox at the fictional shop. The inbox is Spanish and English, nine categories, six routes ([docs/SCOPE.md](SCOPE.md)).
 
 Today the baseline is all-human triage ([docs/BUSINESS_CASE.md](BUSINESS_CASE.md)). Two costs sit on that baseline, both placeholders:
 

@@ -4,7 +4,7 @@ This repository is a synthetic lab. It does not connect to a helpdesk, a mailbox
 
 ## Reporting
 
-Open a private security advisory on this repository. Do not paste live API keys, mailbox dumps, or customer data into issues or pull requests.
+Use GitHub private vulnerability reporting. Open the Security tab and choose "Report a vulnerability". Do not paste live API keys, mailbox dumps, or customer data into issues or pull requests.
 
 ## What the lab enforces
 

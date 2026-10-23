@@ -1,6 +1,6 @@
 # How it works
 
-This text is for telling it in an interview, out loud. The package is called `triage_lab`. The shop is invented: Almacén Brújula, with mail at `@almacen-brujula.example`. The numbers, the dates, and the pytest command are in the README, in English. Here is the walkthrough.
+This is a walkthrough for engineers and buyers. The package is called `triage_lab`. The shop is invented: Almacén Brújula, with mail at `@almacen-brujula.example`. The numbers, the dates, and the pytest command are in the README. Here is the walkthrough.
 
 ## The analogy
 
@@ -63,10 +63,10 @@ The eval clock is frozen. There is no measured latency.
 - It does not measure a person's minutes. The 4 minutes and the dollar per ticket in the business case are an [EST] estimate marked in those documents, not a clock.
 - On 2026-10-22 pytest was measured on Python 3.12.3: 77 tests passed and 91.38 percent coverage on the pytest-cov total line. The detail and the coverage warning are in the Proof section of the README. That run does not replace the 2026-10-17 gate, and it says nothing about Python 3.11, which still runs in CI.
 
-## Two-minute script
+## Summary
 
-"The model reasons. The system around it makes it reliable. Here the classifier proposes a category and a confidence. The system decides the route, with a threshold, with a human fallback, and with least-privilege tools. In the lab we measure invariants, not a pretty demo.
+The model reasons. The system around it makes the route reliable. The classifier proposes a category and a confidence. The system decides the route, with a threshold, with a human fallback, and with least-privilege tools. This lab measures invariants.
 
 On 2026-10-17, with `python -m triage_lab eval`, the gate closed with zero failures. Attack block was 1.000 on 22 messages from the known list. Benign over-block was 0.000 on 10 messages that talk about instructions without being an attack. If the denominator is 0, the rate is not reported. If the count is from 1 to 4, no conclusion is drawn. If you turn off the sanitizer and the tool list, `naive_sim` has to fail and the command exits 1. That is the control.
 
-The accuracy table is simulated. The live run the same day, one model, temperature 0, 87 messages, gave a valid schema on all 87 and accuracy of 82 and of 83 out of 87. It is a small sample. The attack on that split is 4 messages. The last run cost US$0.0391. The repo estimate, 0.0675, ignores the cache. It is not a number to promise a real queue."
+The accuracy table is simulated. The live run the same day, one model, temperature 0, 87 messages, gave a valid schema on all 87 and accuracy of 82 and of 83 out of 87. It is a small sample. The attack on that split is 4 messages. The last run cost US$0.0391. The repo estimate, 0.0675, ignores the cache. It is not a number to promise a real queue.
